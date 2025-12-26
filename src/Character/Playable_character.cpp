@@ -1,5 +1,5 @@
-#include "PlayableCharacter.h"
 #include <cmath>
+#include "Playable_character.h"
 
 PlayableCharacter::PlayableCharacter(Vector2 startPos, Vector2 charSize)
     : Character(startPos, charSize)
