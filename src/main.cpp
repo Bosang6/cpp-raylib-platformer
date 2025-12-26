@@ -1,17 +1,11 @@
 #include "raylib.h"
-
+#include "Scene/Game.h"
 int main()
 {
-    InitWindow(800, 450, "Hello raylib");
-    SetTargetFPS(60);
 
-    while (!WindowShouldClose())
-    {
-        BeginDrawing();
-        ClearBackground(RAYWHITE);
-        DrawText("Hello raylib!", 190, 200, 20, DARKGRAY);
-        EndDrawing();
-    }
+    Game game;
+    game.Start();
+    //delete &game;
 
     CloseWindow();
     return 0;
