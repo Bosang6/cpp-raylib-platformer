@@ -1,14 +1,20 @@
 #include "raylib.h"
 #include "Character.h"
-#include "Playable_character.h"
+#include "PlayableCharacter.h"
 
 int main()
 {
-    InitWindow(800, 450, "Hello raylib");
+    const int screenWidth = 800;
+    const int screenHeight = 450;
+    
+    InitWindow(screenWidth, screenHeight, "Platform 2D - Character Test");
     SetTargetFPS(60);
 
     // Crea il personaggio giocabile
     PlayableCharacter player({400, 200}, {30, 50});
+    
+    // Piattaforma temporanea per testare l'atterraggio
+    Rectangle testPlatform = {300, 350, 200, 20};
 
     while (!WindowShouldClose())
     {
@@ -17,18 +23,32 @@ int main()
         // Update
         player.Update(deltaTime);
         
-        // TODO: logica di collisione con piattaforme
-        // Es: if (CheckCollisionPlatforms(player.GetBounds())) {
-        //         player.OnLandOnPlatform();
-        //     }
+        // Collisione temporanea con piattaforma (per testare)
+        Rectangle playerBounds = player.GetBounds();
+        if (CheckCollisionRecs(playerBounds, testPlatform) && 
+            player.GetVelocity().y > 0) {
+            player.SetOnGround(true);
+            player.SetPosition({player.GetPosition().x, testPlatform.y - 50});
+            player.SetVelocity({player.GetVelocity().x, 0});
+            player.OnLandOnPlatform();
+        } else if (player.GetPosition().y < testPlatform.y - 50) {
+            player.SetOnGround(false);
+        }
         
         // Draw
         BeginDrawing();
-            ClearBackground(RAYWHITE);
+            ClearBackground(Color{135, 206, 235, 255}); // Cielo azzurro
             
+            // Disegna piattaforma di test
+            DrawRectangleRec(testPlatform, DARKGREEN);
+            DrawRectangleLinesEx(testPlatform, 2, GREEN);
+            
+            // Disegna il personaggio
             player.Draw();
             
-            DrawText("Use A/D or Arrow Keys to move, SPACE to jump", 10, 40, 20, DARKGRAY);
+            // UI
+            DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, DARKGRAY);
+            DrawText("Press SPACE/W to jump (double jump available)", 10, 85, 20, DARKGRAY);
             
         EndDrawing();
     }
