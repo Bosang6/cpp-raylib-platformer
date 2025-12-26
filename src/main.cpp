@@ -5,7 +5,7 @@ int main()
 
     Game game;
     game.Start();
-    delete &game;
+    //delete &game;
 
     CloseWindow();
     return 0;

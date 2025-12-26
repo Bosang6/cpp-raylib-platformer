@@ -7,5 +7,3 @@ class GameScene : public ISceneUpdate
 public:
     void Update() override;
 };
-
-
