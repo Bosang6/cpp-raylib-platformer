@@ -7,6 +7,11 @@ private:
     int jumpsRemaining;
     int maxJumps;
     float jumpForce;
+
+    // Animazioni e aspetto
+    float animationTimer;
+    float bounceOffset;
+    bool facingRight;
     
 public:
     PlayableCharacter(Vector2 startPos, Vector2 charSize);
