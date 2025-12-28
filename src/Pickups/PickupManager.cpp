@@ -2,6 +2,7 @@
 #include "Pickup.h"
 #include "Coin.h"
 #include "Spring.h"
+#include "Slow.h"
 #include "Character/Character.h"
 #include "EffectManager.h"
 #include <algorithm>
@@ -14,17 +15,28 @@ void PickupManager::Add(std::unique_ptr<Pickup> pickup) {
 }
 
 
-// Crea una nuova moneta e la aggiunge al vettore dei pickup
-void PickupManager::SpawnCoin(Vector2 pos, float radius, int amount) {
-    // std::make_unique<Coin>(pos, radius, amount) : alloca una nuova Coin in memoria e chiama il costruttore (pos, radius, amount). Nessun new, nessun delete, zero memory leak.
-    // pickups.push_back(...) : aggiunge il puntatore unico appena creato al vettore dei pickup
-    pickups.push_back(std::make_unique<Coin>(pos, radius, amount));
+// Crea e registra un pickup del tipo specificato utilizzando i parametri forniti dallo SpawnInfo.
+// Delego al gameplay la decisione di quando e dove spawnarlo
+void PickupManager::Spawn(Type type, const SpawnInfo& info){
+
+    switch (type)
+    {
+        case Type::Coin:
+            Add(std::make_unique<Coin>(info.pos, info.radius, info.intValue));
+            break;
+
+        case Type::Spring:
+            Add(std::make_unique<Spring>(info.pos, info.radius, info.value));
+            break;
+
+        case Type::Slow:
+            Add(std::make_unique<Slow>(info.pos, info.radius, info.value, info.duration));
+            break;
+
+    }
+    
 }
 
-// Crea un nuovo spring e lo aggiunge al vettore dei pickup
-void PickupManager::SpawnSpring(Vector2 pos, float radius, float boostAmount) {
-    pickups.push_back(std::make_unique<Spring>(pos, radius, boostAmount));
-}
 
 
 void PickupManager::Update(float dt, Character& character, EffectManager& effects) {

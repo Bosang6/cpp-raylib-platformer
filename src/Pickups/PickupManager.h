@@ -3,14 +3,32 @@
 #include <memory>
 #include "raylib.h"
 
+
 // Forward declarations
 class Pickup;
 class Character;
 class EffectManager;
 
+
 // Classe per gestire tutti i pickup presenti nel gioco
 class PickupManager {
 
+    public :
+        // Tipi di Pickup disponibili
+        enum class Type { Coin, Spring, Slow };
+
+        // Parametri di Spawn (decisi dal gameplay)
+        // Valori inizializzati di default
+        struct SpawnInfo
+        {
+            Vector2 pos{};
+            float radius = 10.0f;
+            int intValue = 1;
+            float value = 1.0f;
+            float duration = 0.0f;
+        };
+
+        
     private:
         // Vettore di puntatori unici ai pickup
         // aggiunge : push_back
@@ -18,16 +36,14 @@ class PickupManager {
         // unique_ptr 
         std::vector<std::unique_ptr<Pickup>> pickups;  // Vettore di puntatori unici ai pickup
 
-
-    public:
-        // Aggiunge un pickup generico, utile per estensioni future
+        // Aggiunge un pickup generico
         void Add(std::unique_ptr<Pickup> pickup);
 
-        // Helper : spawn di una moneta in una pos, con un raggio ed un ammontare specifico
-        void SpawnCoin(Vector2 pos, float radius = 10.0f, int amount = 1);
 
-        // Helper : spawn di uno spring in una pos, con un raggio ed una forza di boost specifica
-        void SpawnSpring(Vector2 pos, float radius = 10.0f, float boostAmount = 600.0f);
+    public:
+        
+        // Metodo unico di spawn
+        void Spawn(Type type, const SpawnInfo& info);
 
         // Ciclo di vita dei pickup
         // Aggiorna lo stato, controlla le collisioni, attiva gli effetti e rimuove i pickup raccolti
