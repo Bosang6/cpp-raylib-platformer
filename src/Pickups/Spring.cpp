@@ -4,8 +4,8 @@
 
 
 // Costruttore dello spring
-Spring::Spring(Vector2 pos, float radius, float jumpBoost)
-    : Pickup(pos, radius), jumpBoost(jumpBoost) {}
+Spring::Spring(Vector2 pos, float radius, float jumpMultiplier)
+    : Pickup(pos, radius), jumpMultiplier(jumpMultiplier) {}
 
 
 void Spring::Update(float dt) {
@@ -29,13 +29,43 @@ void Spring::Draw() const {
 
 }
 
-
+// Spring scope : potenzia SOLO il prossimo salto (one-shot), poi si resetta nel Character
 void Spring::OnCollect(Character& character, EffectManager& ) {
 
     collected = true;
+    // character.SetNextJumpMultiplier(jumpMultiplier);
 
-    // Applico il boost di salto al giocatore
-    // player.BoostJump(jumpBoost);
+    // Nel Character inserire : 
+    /*
+        variabile privata nextJumpMultiplier = 1.0f;
+        e 2 medoti:
+        void SetNextJumpMultiplier(float m)
+        float ConsumeNextJumpMultiplier()  
+    */
+
+    /*
+        void Character::SetNextJumpMultiplier(float m){
+            if (m > nextJumpMultiplier) nextJumpMultiplier = m;
+        }
+    */ 
+
+    /*
+        float Character::ConsumeNextJumpMultiplier() {
+            float m = nextJumpMultiplier;
+            nextJumpMultiplier = 1.0f
+            return m
+        }
+    */
+
+    /*  Nel punto del salto
+        if (IsKeyPressed(KEY_SPACE) && onGround)
+        {
+            float mult = ConsumeNextJumpMultiplier();
+            velocity.y = -jumpForce * mult;
+            onGround = false;
+        }
+    */
+
 
     // Implementazione futura : effetto sonoro e visivo
 

@@ -11,12 +11,12 @@ class EffectManager;
 class Spring : public Pickup {
     
     private:
-        float jumpBoost = 1.8f;        // Moltiplicatore del boost di salto
+        float jumpMultiplier = 1.8f;        // Moltiplicatore del boost di salto
 
     public:
 
         // Costruttore dello spring
-        Spring(Vector2 pos, float radius = 10.f, float jumpBoost = 1.8f);
+        Spring(Vector2 pos, float radius = 10.f, float jumpMultiplier = 1.8f);
 
         void Update(float dt) override;
         void Draw() const override;
