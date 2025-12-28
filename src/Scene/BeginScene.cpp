@@ -1,4 +1,3 @@
-#pragma once
 #include "BeginScene.h"
 #include "Game.h"
 #include "raylib.h"
