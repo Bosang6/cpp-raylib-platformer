@@ -1,6 +1,6 @@
 #include "Slow.h"
 #include "raylib.h"
-#include "EffectManager.h"
+#include "EffectSystem.h"
 
 
 // Costruttore dello slow
@@ -35,10 +35,10 @@ void Slow::Draw() const {
 
 
 // Cosa succede quando viene raccolto
-void Slow::OnCollect(Character&, EffectManager& effects) {
+void Slow::OnCollect(Character&, EffectSystem& effects) {
     collected = true;
 
-    // Aggiunge l'effetto di rallentamento al EffectManager
+    // Aggiunge l'effetto di rallentamento al EffectSystem
     effects.AddEffect(EffectType::Slow, durationSeconds, slowMultiplier);
 
     // Implementazione futura : effetto sonoro e visivo

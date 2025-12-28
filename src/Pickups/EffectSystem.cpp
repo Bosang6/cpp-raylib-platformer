@@ -1,8 +1,8 @@
-#include "EffectManager.h"
+#include "EffectSystem.h"
 
 
 
-void EffectManager::AddEffect(EffectType type, float durationSeconds, float value) {
+void EffectSystem::AddEffect(EffectType type, float durationSeconds, float value) {
     // Controllo se l'effetto è già presente
     for (auto& e : effects) {
         if (e.type == type) {
@@ -24,7 +24,7 @@ void EffectManager::AddEffect(EffectType type, float durationSeconds, float valu
 }
 
 
-void EffectManager::Update(float dt) {
+void EffectSystem::Update(float dt) {
     // Aggiorno (decremento) il timer di tutti gli effetti
     for (auto& e : effects) {
         e.remainingTime -= dt;
@@ -45,19 +45,24 @@ void EffectManager::Update(float dt) {
 
 
 // Svuota il vettore degli effetti attivi
-void EffectManager::ClearAllEffects() {
+void EffectSystem::ClearAllEffects() {
     effects.clear();
 }
 
 // Ritorna il numero di effetti attivi
-int EffectManager::CountActiveEffects() const {
+int EffectSystem::CountActiveEffects() const {
     return static_cast<int>(effects.size());
 }
+
+
+// --- Effetti 
+// Gestisco tutti gli effetti qui perchè se ogni Pickup gestisce il proprio effetto avremo problemi di stacking 
+
 
 // Ritorna il moltiplicatore di velocità del player.
 // Se non ci sono effetti Slow attivi -> 1.0 (velocità normale).
 // Se ci sono più Slow -> viene applicato quello che rallenta di più.
-float EffectManager::GetSpeedMultiplier() const {
+float EffectSystem::GetSpeedMultiplier() const {
     
     float multiplier = 1.0f;
 

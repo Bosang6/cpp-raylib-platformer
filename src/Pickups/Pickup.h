@@ -3,7 +3,7 @@
 
 //Forward declaration 
 class Character;
-class EffectManager;
+class EffectSystem;
 
 // Classe base astratta per qualsiasi pickup nel gioco
 class Pickup{
@@ -31,7 +31,7 @@ class Pickup{
 
 
         // Cosa succede quando viene raccolto
-        virtual void OnCollect(Character& character, EffectManager& effects) = 0;
+        virtual void OnCollect(Character& character, EffectSystem& effects) = 0;
 
 
         // Utility

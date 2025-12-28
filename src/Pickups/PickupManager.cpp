@@ -4,7 +4,7 @@
 #include "Spring.h"
 #include "Slow.h"
 #include "Character/Character.h"
-#include "EffectManager.h"
+#include "EffectSystem.h"
 #include <algorithm>
 
 
@@ -39,7 +39,7 @@ void PickupManager::Spawn(Type type, const SpawnInfo& info){
 
 
 
-void PickupManager::Update(float dt, Character& character, EffectManager& effects) {
+void PickupManager::Update(float dt, Character& character, EffectSystem& effects) {
     // 1. Updtate + Collisione
     for(auto& p : pickups) {
         // p è un reference(&) a un puntatore unico (unique_ptr<Pickup>)

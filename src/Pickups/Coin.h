@@ -25,6 +25,6 @@ class Coin : public Pickup {
 
 
         // Cosa succede quando viene raccolto
-        void OnCollect(Character& character, EffectManager& effects) override;
+        void OnCollect(Character& character, EffectSystem& effects) override;
 
 };

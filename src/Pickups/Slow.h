@@ -3,7 +3,7 @@
 
 // Forward declaration
 class Character;
-class EffectManager;
+class EffectSystem;
 
 // Classe che rappresenta l'effetto di rallentamento nel gioco
 class Slow : public Pickup {
@@ -19,6 +19,6 @@ class Slow : public Pickup {
 
         void Update(float dt) override;
         void Draw() const override;
-        void OnCollect(Character& character, EffectManager& effects) override;
+        void OnCollect(Character& character, EffectSystem& effects) override;
 
 };

@@ -7,7 +7,7 @@
 // Forward declarations
 class Pickup;
 class Character;
-class EffectManager;
+class EffectSystem;
 
 
 // Classe per gestire tutti i pickup presenti nel gioco
@@ -28,7 +28,7 @@ class PickupManager {
             float duration = 0.0f;
         };
 
-        
+
     private:
         // Vettore di puntatori unici ai pickup
         // aggiunge : push_back
@@ -47,7 +47,7 @@ class PickupManager {
 
         // Ciclo di vita dei pickup
         // Aggiorna lo stato, controlla le collisioni, attiva gli effetti e rimuove i pickup raccolti
-        void Update(float dt, Character& character, EffectManager& effects);
+        void Update(float dt, Character& character, EffectSystem& effects);
         // Disegna tutti i pickup attivi
         void Draw() const;
 

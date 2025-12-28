@@ -30,7 +30,7 @@ void Spring::Draw() const {
 }
 
 // Spring scope : potenzia SOLO il prossimo salto (one-shot), poi si resetta nel Character
-void Spring::OnCollect(Character& character, EffectManager& ) {
+void Spring::OnCollect(Character& character, EffectSystem& ) {
 
     collected = true;
     // character.SetNextJumpMultiplier(jumpMultiplier);

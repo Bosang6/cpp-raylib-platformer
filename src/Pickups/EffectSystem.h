@@ -20,7 +20,7 @@ struct EffectInstance {
 
 
 // Classe responsabile della gestione degli effetti di pickup
-class EffectManager{
+class EffectSystem{
 
     private:
         std::vector<EffectInstance> effects;            // Vettore che contiene tutti gli effetti attivi
