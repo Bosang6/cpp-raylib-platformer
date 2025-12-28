@@ -152,7 +152,7 @@ void PlayableCharacter::HandleInput(float deltaTime) {
     }
     
     // Salto
-    if (IsKeyPressed(KEY_SPACE) || IsKeyPressed(KEY_W) || IsKeyPressed(KEY_UP)) {
+    if (IsKeyPressed(KEY_SPACE)) {
         Jump();
     }
 }

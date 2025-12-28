@@ -1,5 +1,4 @@
 #include "raylib.h"
-#include "Character.h"
 #include "Character/Playable_character.h"
 
 int main()
@@ -48,7 +47,7 @@ int main()
             
             // UI
             DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, DARKGRAY);
-            DrawText("Press SPACE/W to jump (double jump available)", 10, 85, 20, DARKGRAY);
+            DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, DARKGRAY);
             
         EndDrawing();
     }
