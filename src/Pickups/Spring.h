@@ -11,7 +11,7 @@ class EffectSystem;
 class Spring : public Pickup {
     
     private:
-        float jumpMultiplier = 1.8f;        // Moltiplicatore del boost di salto
+        float jumpMultiplier;        // Moltiplicatore del boost di salto
 
     public:
 

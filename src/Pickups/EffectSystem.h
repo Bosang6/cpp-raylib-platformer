@@ -3,26 +3,26 @@
 #include <algorithm>
 
 
-// Enum che rappresenta i tipi di effetti disponibili nel gioco
-// Slow : rallenta il giocatore
-enum class EffectType {
-    Slow,
-};
-
-
-// Struttura che rappresenta una singola istanza di effetto attivo
-struct EffectInstance {
-    EffectType type;            // Tipo di effetto
-    float remainingTime;        // Tempo rimanente per l'effetto
-    float value;                // Valore associato all'effetto (es. 0.5 per slow) 
-};
-
-
-
 // Classe responsabile della gestione degli effetti di pickup
 class EffectSystem{
 
+    public :
+        // Enum che rappresenta i tipi di effetti disponibili nel gioco
+        // Slow : rallenta il giocatore
+        enum class EffectType {
+            Slow,
+            ScoreMultiplier
+        };
+
+
     private:
+        // Struttura che rappresenta una singola istanza di effetto attivo
+        struct EffectInstance {
+            EffectType type;            // Tipo di effetto
+            float remainingTime;        // Tempo rimanente per l'effetto
+            float value;                // Valore associato all'effetto (es. 0.5 per slow) 
+        };
+
         std::vector<EffectInstance> effects;            // Vettore che contiene tutti gli effetti attivi
 
 
@@ -41,6 +41,9 @@ class EffectSystem{
 
         // Getter : moltiplicatore di velocità in base agli effetti attivi (default 1.0f)
         float GetSpeedMultiplier() const;
+
+        // Getter : moltiplicatore di punteggio 
+        float GetScoreMultiplier() const;
 
         // In futuro aggiungere ScoreMultiplier e ReverseControls
 };

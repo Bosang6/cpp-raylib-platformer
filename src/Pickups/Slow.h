@@ -9,13 +9,13 @@ class EffectSystem;
 class Slow : public Pickup {
     
     private:
-        float slowMultiplier = 0.5f;      // Fattore di rallentamento (es. 0.5 = 50% velocità)
-        float durationSeconds = 5.0f;        // Durata dell'effetto in secondi
+        float slowMultiplier;      // Fattore di rallentamento (es. 0.5 = 50% velocità)
+        float durationSeconds;        // Durata dell'effetto in secondi
 
     public:
 
         // Costruttore dello slow
-        Slow(Vector2 pos, float radius = 10.f, float slowMultiplier = 0.5f, float duration = 5.0f);
+        Slow(Vector2 pos, float radius = 10.0f, float slowMultiplier = 0.5f, float durationSeconds = 5.0f);
 
         void Update(float dt) override;
         void Draw() const override;

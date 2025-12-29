@@ -10,7 +10,7 @@ class Pickup{
 
     protected:
         Vector2 position{};              // Posizione del pickup
-        float radius{10.0f};            // Raggio del pickup
+        float radius;            // Raggio del pickup
         bool collected{false};          // Stato di raccolta del pickup
 
 

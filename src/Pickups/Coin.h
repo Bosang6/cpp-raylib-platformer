@@ -8,12 +8,12 @@ class Coin : public Pickup {
     private:
         float angle{0.0f};              // Angolo per l'animazione di rotazione
         float spinSpeed{4.0f};          // Velocità di rotazione
-        int value{1};                   // Valore della moneta
+        int value;                   // Valore della moneta
 
     public:
 
         // Costruttore della moneta
-        Coin(Vector2 pos, float radius = 10.f, int v = 1);
+        Coin(Vector2 pos, float radius = 10.f, int value = 1);
 
 
         // Metodo per aggiornare lo stato della moneta (es. animazioni)

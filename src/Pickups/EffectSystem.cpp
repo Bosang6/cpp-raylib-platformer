@@ -1,7 +1,6 @@
 #include "EffectSystem.h"
 
 
-
 void EffectSystem::AddEffect(EffectType type, float durationSeconds, float value) {
     // Controllo se l'effetto è già presente
     for (auto& e : effects) {
@@ -64,15 +63,34 @@ int EffectSystem::CountActiveEffects() const {
 // Se ci sono più Slow -> viene applicato quello che rallenta di più.
 float EffectSystem::GetSpeedMultiplier() const {
     
-    float multiplier = 1.0f;
+    float slowMultiplier = 1.0f;
 
     for (const auto& e : effects) {
         if (e.type == EffectType::Slow) {
-            if(e.value < multiplier){
-                multiplier = e.value;
+            if(e.value < slowMultiplier){
+                slowMultiplier = e.value;
             }
         }
     }
 
-    return multiplier;
+    return slowMultiplier;
+}
+
+
+// Ritorna il moltiplicatore di punteggio
+// Stesso pattern di Slow ma applicato al punteggio
+float EffectSystem::GetScoreMultiplier() const {
+
+    float scoreMultiplier = 1.0f;
+
+    for(const auto& e : effects){
+        if(e.type == EffectType::ScoreMultiplier){
+            if(e.value > scoreMultiplier){
+                scoreMultiplier = e.value;
+            }
+        }
+    }
+
+    return scoreMultiplier;
+    
 }

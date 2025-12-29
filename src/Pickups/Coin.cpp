@@ -7,8 +7,8 @@
 
 
 // Costruttore della moneta
-Coin::Coin(Vector2 pos, float radius, int v)
-    : Pickup(pos, radius), value(v) {}
+Coin::Coin(Vector2 pos, float radius, int value)
+    : Pickup(pos, radius), value(value) {}
 
 
 // Metodo per aggiornare lo stato della moneta (es. animazioni)

@@ -4,8 +4,8 @@
 
 
 // Costruttore dello slow
-Slow::Slow(Vector2 pos, float radius, float slowMultiplier, float duration)
-    : Pickup(pos, radius), slowMultiplier(slowMultiplier), durationSeconds(duration) {}
+Slow::Slow(Vector2 pos, float radius, float slowMultiplier, float durationSeconds)
+    : Pickup(pos, radius), slowMultiplier(slowMultiplier), durationSeconds(durationSeconds) {}
 
 
 
@@ -39,7 +39,7 @@ void Slow::OnCollect(Character&, EffectSystem& effects) {
     collected = true;
 
     // Aggiunge l'effetto di rallentamento al EffectSystem
-    effects.AddEffect(EffectType::Slow, durationSeconds, slowMultiplier);
+    effects.AddEffect(EffectSystem::EffectType::Slow, durationSeconds, slowMultiplier);
 
     // Implementazione futura : effetto sonoro e visivo
 }
