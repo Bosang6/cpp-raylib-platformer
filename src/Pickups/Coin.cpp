@@ -42,9 +42,9 @@ void Coin::Draw() const {
 
 // Cosa succede quando viene raccolto
 // Aggiunge il valore della moneta al punteggio del giocatore
-void Coin::OnCollect(Character& character, EffectSystem&) {
+void Coin::OnCollect(Character& character, EffectSystem& effects) {
     collected = true;
-    //character.AddScore(value);
+    //character.AddScore(value, effects);
 }
 
 
