@@ -16,7 +16,7 @@ class ScoreMultiplier : public Pickup{
     public:
 
         //Costruttore
-        ScoreMultiplier(Vector2 pos, float radius = 10.0f, float scoreMultiplier = 2.0f, float durationSeconds = 10.0f );
+        ScoreMultiplier(Vector2 pos, float radius, float scoreMultiplier, float durationSeconds);
 
         void Update(float dt) override;
         void Draw() const override;

@@ -16,7 +16,7 @@ class Spring : public Pickup {
     public:
 
         // Costruttore dello spring
-        Spring(Vector2 pos, float radius = 10.f, float jumpMultiplier = 1.8f);
+        Spring(Vector2 pos, float radius, float jumpMultiplier);
 
         void Update(float dt) override;
         void Draw() const override;

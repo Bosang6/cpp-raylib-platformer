@@ -15,7 +15,7 @@ class Slow : public Pickup {
     public:
 
         // Costruttore dello slow
-        Slow(Vector2 pos, float radius = 10.0f, float slowMultiplier = 0.5f, float durationSeconds = 5.0f);
+        Slow(Vector2 pos, float radius, float slowMultiplier, float durationSeconds);
 
         void Update(float dt) override;
         void Draw() const override;

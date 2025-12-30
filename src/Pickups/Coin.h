@@ -13,7 +13,7 @@ class Coin : public Pickup {
     public:
 
         // Costruttore della moneta
-        Coin(Vector2 pos, float radius = 10.f, int value = 100);
+        Coin(Vector2 pos, float radius, int value);
 
 
         // Metodo per aggiornare lo stato della moneta (es. animazioni)

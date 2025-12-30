@@ -5,7 +5,6 @@
 #include "Pickup.h"
 
 
-// Forward declarations
 class Pickup;
 class Character;
 class EffectSystem;
@@ -18,45 +17,44 @@ class PickupManager {
         // Tipi di Pickup disponibili
         enum class Type { Coin, Spring, Slow, ScoreMultiplier } ;
 
-        // Parametri di Spawn (decisi dal gameplay)
-        // Valori inizializzati di default
-        struct SpawnInfo
+
+        // Struttura di default
+        struct Defaults
         {
-            Vector2 pos{};
-            float radius = 10.0f;
-            int intValue = 1;
-            float value = 1.0f;
-            float duration = 0.0f;
+            float radius = 10.f;
+            // Coin
+            int   coinValue  = 10;
+
+            // Slow
+            float slowMultiplier  = 0.6f;
+            float slowDuration = 4.f;
+
+            // Spring
+            float jumpMultiplier = 1.8f;
+
+            // ScoreMultiplier
+            float scoreMultiplier = 2.f;
+            float scoreDuration = 6.f;
         };
 
 
     private:
-        // Vettore di puntatori unici ai pickup
-        // aggiunge : push_back
-        // rimuove : erase 
-        // unique_ptr 
-        std::vector<std::unique_ptr<Pickup>> pickups;  // Vettore di puntatori unici ai pickup
+        
+        Defaults defaults; 
 
-        // Aggiunge un pickup generico
+        std::vector<std::unique_ptr<Pickup>> pickups;  
         void Add(std::unique_ptr<Pickup> pickup);
 
 
     public:
         
-        // Metodo unico di spawn
-        void Spawn(Type type, const SpawnInfo& info);
+        void Spawn(Type type, Vector2 pos);
 
-        // Ciclo di vita dei pickup
-        // Aggiorna lo stato, controlla le collisioni, attiva gli effetti e rimuove i pickup raccolti
         void Update(float dt, Character& character, EffectSystem& effects);
-        // Disegna tutti i pickup attivi
         void Draw() const;
 
 
-        // Utility
-        // Rimuove tutti i pickup
         void Clear();
-        // Restituisce il numero di pickup attuali
         int Count() const;
 
 };

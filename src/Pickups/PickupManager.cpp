@@ -18,24 +18,24 @@ void PickupManager::Add(std::unique_ptr<Pickup> pickup) {
 
 // Crea e registra un pickup del tipo specificato utilizzando i parametri forniti dallo SpawnInfo.
 // Delego al gameplay la decisione di quando e dove spawnarlo
-void PickupManager::Spawn(Type type, const SpawnInfo& info){
+void PickupManager::Spawn(Type type, Vector2 pos){
 
     switch (type)
     {
         case Type::Coin:
-            Add(std::make_unique<Coin>(info.pos, info.radius, info.intValue));
+            Add(std::make_unique<Coin>(pos, defaults.radius, defaults.coinValue));
             break;
 
         case Type::Spring:
-            Add(std::make_unique<Spring>(info.pos, info.radius, info.value));
+            Add(std::make_unique<Spring>(pos, defaults.radius, defaults.jumpMultiplier));
             break;
 
         case Type::Slow:
-            Add(std::make_unique<Slow>(info.pos, info.radius, info.value, info.duration));
+            Add(std::make_unique<Slow>(pos, defaults.radius, defaults.slowMultiplier, defaults.slowDuration));
             break;
 
         case Type::ScoreMultiplier:
-            Add(std::make_unique<ScoreMultiplier>(info.pos, info.radius, info.value, info.duration));
+            Add(std::make_unique<ScoreMultiplier>(pos, defaults.radius, defaults.scoreMultiplier, defaults.scoreDuration));
             break;
 
     }

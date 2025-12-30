@@ -28,7 +28,7 @@ class EffectSystem{
 
     public:
         // Aggiunge un effetto: se già presente, aggiorna il timer ed il valore
-        void AddEffect(EffectType type, float durationSeconds, float value = 1.0f);
+        void AddEffect(EffectType type, float durationSeconds, float value);
 
         // Aggiorna il timer di tutti gli effetti attivi e rimuove quelli scaduti
         void Update(float dt);
