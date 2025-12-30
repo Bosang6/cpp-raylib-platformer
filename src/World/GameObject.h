@@ -5,6 +5,7 @@ class GameObject {
 public:
     GameObject(const Vector2& pos)
         : position(pos) {};
+    virtual ~GameObject() = default;
 
     // GameObject(const Vector2& pos, const Texture2D& tex)
     //     : position(pos), texture(tex) {}

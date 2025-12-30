@@ -17,7 +17,8 @@ void PlatformsManager::DeletePlatforms() {
 
 void PlatformsManager::DrawPlatforms() {
     for(auto& platform : platforms) {
-        platform.Draw();
+        //platform.Draw();
+        platform->Draw();
     }
 }
 
@@ -26,6 +27,7 @@ float PlatformsManager::RandFloat(const float a, const float b){
     return dist(rng); 
 }
 
+// Generate a new platform at the top of the screen
 void PlatformsManager::GenerateOne(){
     float gapY = RandFloat(minGapY, maxGapY);
     gapY = std::min(gapY, playerMaxJumpVertical);
@@ -34,20 +36,38 @@ void PlatformsManager::GenerateOne(){
     float newX = RandFloat(20.0f, Game::width - 100); // Platform Size: 80*20
 
     // ---make sure player can jump to the new platform---
+    // float flag = RandFloat(-1.0f, 1.0f);
     // float preX = platforms.front().position.x;
-    // while(std::abs(newX - preX) > playerMaxJumpHorizontal){
-    //     newX = RandFloat(20.0f, Game::width - 100);
+    // if(flag < 0.0f && preX > 40.0f){
+    //     newX = preX + flag * playerMaxJumpHorizontal;
+    // }
+    // else{
+    //     newX = preX + 80.0f + flag * playerMaxJumpHorizontal;
     // }
 
-    platforms.push_front(Platform{Vector2{newX, newY}});
+    float platformType = RandFloat(0.0f, 10.0f);
+    // if(platformType > 5.0f && platformType < 10.0f){
+    //     platforms.push_front(BreakablePlatform{Vector2{newX, newY}});
+    // }
+    // else{
+    //     platforms.push_front(Platform{Vector2{newX, newY}});
+    // }
+
+    if(platformType > 5.0f && platformType < 10.0f){
+        platforms.push_front(std::make_unique<BreakablePlatform>(Vector2{newX, newY}));
+    }
+    else{
+        platforms.push_front(std::make_unique<Platform>(Vector2{newX, newY}));
+    }
 
     lastGeneratedY = newY;
 }
 
-// 
+// Deleting platforms outside the boundary recursively
 void PlatformsManager::CheckDelete() {
     if(!platforms.empty()){
-        Platform& last = platforms.back();
+        //Platform& last = platforms.back();
+        Platform& last = *platforms.back();
         if(last.position.y > Game::height + marginBottom){
             platforms.pop_back();
             PlatformsManager::CheckDelete();
@@ -57,7 +77,23 @@ void PlatformsManager::CheckDelete() {
 
 void PlatformsManager::UpdatePlatformsPosition() {
     for(auto& platform : platforms){
-        platform.position.y += 0.1f;
+        //platform.UpdatePosition(0.5f);
+        platform->UpdatePosition(0.5f);
     }
-    lastGeneratedY = platforms.front().position.y;
+    //lastGeneratedY = platforms.front().position.y;
+    lastGeneratedY = platforms.front()->position.y;
+}
+
+// ------- api ----------
+
+// Rectangle pointer vector using for collision detection
+std::vector<const Rectangle*> PlatformsManager::GetPlatformsBound() const {
+    std::vector<const Rectangle*> bounds;
+    bounds.reserve(platforms.size());
+
+    for(const auto& platform : platforms){
+        //bounds.push_back(&platform.GetBounds());
+        bounds.push_back(&platform->GetBounds());
+    }
+    return bounds;
 }
