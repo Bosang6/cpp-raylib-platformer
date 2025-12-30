@@ -33,39 +33,8 @@ void Spring::Draw() const {
 void Spring::OnCollect(Character& character, EffectSystem& ) {
 
     collected = true;
-    // character.SetNextJumpMultiplier(jumpMultiplier);
-
-    // Nel Character inserire : 
-    /*
-        variabile privata nextJumpMultiplier = 1.0f;
-        e 2 medoti:
-        void SetNextJumpMultiplier(float m)
-        float ConsumeNextJumpMultiplier()  
-    */
-
-    /*
-        void Character::SetNextJumpMultiplier(float m){
-            if (m > nextJumpMultiplier) nextJumpMultiplier = m;
-        }
-    */ 
-
-    /*
-        float Character::ConsumeNextJumpMultiplier() {
-            float m = nextJumpMultiplier;
-            nextJumpMultiplier = 1.0f
-            return m
-        }
-    */
-
-    /*  Nel punto del salto
-        if (IsKeyPressed(KEY_SPACE) && onGround)
-        {
-            float mult = ConsumeNextJumpMultiplier();
-            velocity.y = -jumpForce * mult;
-            onGround = false;
-        }
-    */
-
+    
+    character.SetNextJumpMultiplier(jumpMultiplier);
 
     // Implementazione futura : effetto sonoro e visivo
 

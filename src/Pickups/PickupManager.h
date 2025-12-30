@@ -2,6 +2,7 @@
 #include <vector>
 #include <memory>
 #include "raylib.h"
+#include "Pickup.h"
 
 
 // Forward declarations
@@ -15,7 +16,7 @@ class PickupManager {
 
     public :
         // Tipi di Pickup disponibili
-        enum class Type { Coin, Spring, Slow };
+        enum class Type { Coin, Spring, Slow, ScoreMultiplier } ;
 
         // Parametri di Spawn (decisi dal gameplay)
         // Valori inizializzati di default

@@ -3,6 +3,7 @@
 #include "Coin.h"
 #include "Spring.h"
 #include "Slow.h"
+#include "ScoreMultiplier.h"
 #include "Character/Character.h"
 #include "EffectSystem.h"
 #include <algorithm>
@@ -31,6 +32,10 @@ void PickupManager::Spawn(Type type, const SpawnInfo& info){
 
         case Type::Slow:
             Add(std::make_unique<Slow>(info.pos, info.radius, info.value, info.duration));
+            break;
+
+        case Type::ScoreMultiplier:
+            Add(std::make_unique<ScoreMultiplier>(info.pos, info.radius, info.value, info.duration));
             break;
 
     }
