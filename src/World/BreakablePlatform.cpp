@@ -3,7 +3,8 @@
 void BreakablePlatform::Draw() const {
     if(broken) return;
 
-    Color c = triggered ? YELLOW : RED;
+    unsigned char alpha = static_cast<unsigned char>(255 *(breakTimer/breakDelay));
+    Color c{230, 41, 55, alpha};
     DrawRectangleRounded(bounds, 0.2f, 10, c);
 }
 
@@ -14,8 +15,8 @@ void BreakablePlatform::UpdatePosition(float dt){
 
     // timer
     if(triggered && !broken){
-        breakTimer += dt;
-        if(breakTimer > breakDelay){
+        breakTimer -= dt;
+        if(breakTimer < 0.0){
             broken = true;
         }
     }
@@ -25,7 +26,7 @@ void BreakablePlatform::UpdatePosition(float dt){
 void BreakablePlatform::TriggerBreak(){
     if(!triggered && !broken){
         triggered = true;
-        timer = 0.0f;
+        breakTimer = 50.0f;
     }
 }
 

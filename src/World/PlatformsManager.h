@@ -18,7 +18,7 @@ public:
     void CheckDelete();
 
     // api
-    std::vector<const Rectangle*> GetPlatformsBound() const;
+    const std::deque<std::unique_ptr<Platform>>& GetPlatforms() const;
     
 private:
     PlatformsManager() = default;
@@ -47,7 +47,7 @@ private:
     /*
         H = v0^2 / 2g * 2(jump twice)
     */
-    float playerMaxJumpVertical{maxVerticleVelocity * maxVerticleVelocity / gravity};
+    float playerMaxJumpVertical{maxVerticleVelocity * maxVerticleVelocity / (2 * gravity) * 0.9f};
     /*
         Single Jump max distance
         Dx = moveSpeed * T_max

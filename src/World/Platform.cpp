@@ -16,3 +16,7 @@ const Rectangle& Platform::GetBounds() const {
 Vector2 Platform::GetSurfaceCenter() const {
     return Vector2{position.x + width/2, position.y};
 }
+
+const E_PlatformType Platform::GetType() const{
+    return type;
+}

@@ -23,4 +23,5 @@ public:
     virtual void UpdatePosition(float dt);
     const Rectangle& GetBounds() const;
     Vector2 GetSurfaceCenter() const;
+    const E_PlatformType GetType() const;
 };
