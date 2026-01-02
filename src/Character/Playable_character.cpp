@@ -12,9 +12,9 @@ PlayableCharacter::PlayableCharacter(Vector2 startPos, Vector2 charSize)
 {
 }
 
-void PlayableCharacter::Update(float deltaTime) {
+void PlayableCharacter::Update(float deltaTime, const EffectSystem& effects) {
     // Gestisce input
-    HandleInput(deltaTime);
+    HandleInput(deltaTime, effects);
     
     // Chiama l'update base
     Character::Update(deltaTime);
@@ -156,6 +156,10 @@ void PlayableCharacter::HandleInput(float deltaTime, const EffectSystem& effects
         facingRight = true;
     }
     
+    // Salto
+    if (IsKeyPressed(KEY_SPACE)) {
+        Jump();
+    }
 }
 
 void PlayableCharacter::Jump() {

@@ -1,5 +1,6 @@
 #pragma once
 #include "Character.h"
+#include "Pickups/EffectSystem.h"
 
 class PlayableCharacter : public Character {
 private:

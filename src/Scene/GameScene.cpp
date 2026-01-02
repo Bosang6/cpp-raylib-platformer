@@ -1,5 +1,4 @@
 #include "GameScene.h"
-#include <iostream>
 
 GameScene::GameScene() {
     GameInit();
