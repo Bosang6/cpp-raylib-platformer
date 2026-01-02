@@ -24,7 +24,9 @@ void Character::Update(float deltaTime) {
 }
 
 void Character::SetNextJumpMultiplier(float jumpMultiplier){
+
 nextJumpMultiplier = jumpMultiplier;
+
 }
 
 void Character::Draw() {
