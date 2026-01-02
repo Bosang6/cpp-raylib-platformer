@@ -6,7 +6,7 @@
 
 Game::Game(){
     //initialize window
-    InitWindow(800, 450, "Game");
+    InitWindow(width, height, "Game");
     SetTargetFPS(60);
     currentScene = new BeginScene();
 }
@@ -18,16 +18,18 @@ Game::~Game(){
 void Game::Start(){
     //game loop
     while(!WindowShouldClose()){
-        //input handling --> TODO
-        //------------- Just Test ---------------
-        if(IsKeyPressed(KEY_ENTER)){
+        // change scene 
+        if(currentSceneType == E_SceneType::Begin && IsKeyPressed(KEY_ENTER)){
             ChangeScene(E_SceneType::Game);
         }
-
-        if(IsKeyPressed(KEY_SPACE)){
-            ChangeScene(E_SceneType::End);
+        else if(currentSceneType == E_SceneType::Game){
+            if(!dynamic_cast<GameScene*>(currentScene)->GetIsRunning()){
+                ChangeScene(E_SceneType::End);
+            }
         }
-        //---------------------------------------
+        else if(currentSceneType == E_SceneType::End && IsKeyPressed(KEY_ENTER)){
+            ChangeScene(E_SceneType::Begin);
+        }
         currentScene->Update();
     }
 }
@@ -46,4 +48,9 @@ void Game::ChangeScene(const E_SceneType type){
         currentScene = new EndScene();
         break;
     }
+    currentSceneType = type;
+}
+
+void Game::SetSceneTyoe(E_SceneType sceneType){
+    currentSceneType = sceneType;
 }

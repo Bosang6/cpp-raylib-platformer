@@ -1,4 +1,5 @@
 #include "PlatformsManager.h"
+#include <iostream>
 
 PlatformsManager& PlatformsManager::GetInstance() {
     static PlatformsManager instance;
@@ -32,23 +33,29 @@ void PlatformsManager::GenerateOne(){
     gapY = std::min(gapY, playerMaxJumpVertical);
 
     float newY = lastGeneratedY - gapY;
-    float newX = RandFloat(20.0f, Game::width - 100); // Platform Size: 80*20
+    float newX = RandFloat(20.0f, Game::width - 100.0f);
 
     // ---make sure player can jump to the new platform---
-    // float flag = RandFloat(-1.0f, 1.0f);
-    // float preX = platforms.front().position.x;
-    // if(flag < 0.0f && preX > 40.0f){
-    //     newX = preX + flag * playerMaxJumpHorizontal;
-    // }
-    // else{
-    //     newX = preX + 80.0f + flag * playerMaxJumpHorizontal;
-    // }
+    if(!platforms.empty()){
+        Platform* firstPlatform = platforms.front().get();
+        float center = firstPlatform->GetSurfaceCenter().x;
+        float left = center + playerMaxJumpHorizontal - 40.0f;
+        left = left < 20.0f ? 20.0f : left;
+        float right = center - playerMaxJumpHorizontal + 40.0f;
+        right = (right < Game::width - 100) ? right : (Game::width - 100);
+        newX = RandFloat(left, right); // Platform Size: 80*20
+
+         std::cout << playerMaxJumpHorizontal << " " << center << std::endl; 
+    }
 
     float generateProbablity = RandFloat(0.0f, 10.0f);
 
     // Generate a BreakablePlatform with 30% probability
     if(generateProbablity > 7.0f && generateProbablity < 10.0f){
         platforms.push_front(std::make_unique<BreakablePlatform>(Vector2{newX, newY}));
+    }
+    else if(generateProbablity > 4.0f && generateProbablity <= 7.0f){
+        platforms.push_front(std::make_unique<MovingPlatform>(Vector2{newX, newY}, RandFloat(0.0f, 1.0f)));
     }
     else{
         platforms.push_front(std::make_unique<Platform>(Vector2{newX, newY}));
@@ -68,16 +75,16 @@ void PlatformsManager::CheckDelete() {
     }
 }
 
-void PlatformsManager::UpdatePlatformsPosition() {
+void PlatformsManager::UpdatePlatformsPosition(float dt) {
     for(auto& platform : platforms){
-        platform->UpdatePosition(0.5f);
+        platform->UpdatePosition(dt);
     }
     lastGeneratedY = platforms.front()->position.y;
 }
 
 // ------- api ----------
 
-// Platform vector using for collision detection
+// using for collision detection
 const std::deque<std::unique_ptr<Platform>>& PlatformsManager::GetPlatforms() const{
     return platforms;
 }

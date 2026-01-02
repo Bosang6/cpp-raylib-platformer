@@ -15,7 +15,7 @@ void BreakablePlatform::UpdatePosition(float dt){
 
     // timer
     if(triggered && !broken){
-        breakTimer -= dt;
+        breakTimer -= dt * moveDownVelocity;
         if(breakTimer < 0.0){
             broken = true;
         }

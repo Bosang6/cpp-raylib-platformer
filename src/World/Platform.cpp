@@ -5,8 +5,8 @@ void Platform::Draw() const {
 }
 
 void Platform::UpdatePosition(float dt){
-    position.y += dt;
-    bounds.y += dt;
+    position.y += dt * moveDownVelocity;
+    bounds.y += dt * moveDownVelocity;
 }
 
 const Rectangle& Platform::GetBounds() const {

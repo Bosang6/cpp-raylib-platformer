@@ -14,6 +14,7 @@ protected:
     E_PlatformType type{};
     static constexpr float width{80.0f};
     static constexpr float height{20.0f};
+    float moveDownVelocity{50.0f};
 
 public:
     Platform(const Vector2& pos, E_PlatformType t = E_PlatformType::Solid)
