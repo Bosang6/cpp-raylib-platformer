@@ -1,5 +1,4 @@
 #include "PlatformsManager.h"
-#include <iostream>
 
 PlatformsManager& PlatformsManager::GetInstance() {
     static PlatformsManager instance;
@@ -44,8 +43,6 @@ void PlatformsManager::GenerateOne(){
         float right = center - playerMaxJumpHorizontal + 40.0f;
         right = (right < Game::width - 100) ? right : (Game::width - 100);
         newX = RandFloat(left, right); // Platform Size: 80*20
-
-         std::cout << playerMaxJumpHorizontal << " " << center << std::endl; 
     }
 
     float generateProbablity = RandFloat(0.0f, 10.0f);

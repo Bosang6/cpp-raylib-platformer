@@ -1,6 +1,5 @@
 #include "MovingPlatform.h"
 #include <cmath>
-#include <iostream>
 
 void MovingPlatform::Draw() const {
     Platform::Draw();
