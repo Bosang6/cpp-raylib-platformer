@@ -17,12 +17,12 @@ public:
     PlayableCharacter(Vector2 startPos, Vector2 charSize);
     
     // Override metodi base
-    void Update(float deltaTime) override;
+    void Update(float deltaTime, const EffectSystem& effects);
     void Draw() override;
     
     // Metodi specifici del personaggio giocabile
     void Jump();
-    void HandleInput(float deltaTime);
+    void HandleInput(float deltaTime, const EffectSystem& effects);
     
     // Override per gestire il reset dei salti
     void OnLandOnPlatform() override;

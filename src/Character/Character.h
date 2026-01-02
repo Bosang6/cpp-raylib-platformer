@@ -15,7 +15,8 @@ protected:
     float gravity;
     float moveSpeed;
     float maxFallSpeed;
-    
+    float nextJumpMultiplier = 1.0f;
+   
 public:
     Character(Vector2 startPos, Vector2 charSize);
     virtual ~Character() = default;
@@ -32,6 +33,8 @@ public:
     // Interfaccia con il mondo esterno (break per ora)
     virtual void OnLandOnPlatform();
     virtual void OnCollectPowerUp(int powerUpType);
+    virtual void SetNextJumpMultiplier(float jumpMultiplier);
+
     
     // Getters
     Vector2 GetPosition() const { return position; }

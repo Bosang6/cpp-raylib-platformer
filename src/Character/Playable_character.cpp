@@ -140,26 +140,28 @@ void PlayableCharacter::Draw() {
     DrawText(TextFormat("Vel Y: %.0f", velocity.y), 10, 35, 20, WHITE);
 }
 
-void PlayableCharacter::HandleInput(float deltaTime) {
+void PlayableCharacter::HandleInput(float deltaTime, const EffectSystem& effects) {
+    
+    float speed = moveSpeed * effects.GetSpeedMultiplier();
+    
     // Movimento orizzontale
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
-        MoveLeft(deltaTime);
+        velocity.x = -speed;
+        //MoveLeft(deltaTime);
         facingRight = false;
     }
     if (IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) {
-        MoveRight(deltaTime);
+        velocity.x = speed;
+        //MoveRight(deltaTime);
         facingRight = true;
     }
     
-    // Salto
-    if (IsKeyPressed(KEY_SPACE)) {
-        Jump();
-    }
 }
 
 void PlayableCharacter::Jump() {
     if (jumpsRemaining > 0) {
-        velocity.y = jumpForce;
+        velocity.y = jumpForce * nextJumpMultiplier;  // applica Spring
+        nextJumpMultiplier = 1.0f;                    // resetta 
         jumpsRemaining--;
         isOnGround = false;
     }

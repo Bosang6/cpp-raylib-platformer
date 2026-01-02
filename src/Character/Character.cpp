@@ -23,6 +23,10 @@ void Character::Update(float deltaTime) {
     velocity.x = 0.0f;
 }
 
+void Character::SetNextJumpMultiplier(float jumpMultiplier){
+nextJumpMultiplier = jumpMultiplier;
+}
+
 void Character::Draw() {
     // Disegno base - può essere overridden
     DrawRectangleV(position, size, BLUE);
