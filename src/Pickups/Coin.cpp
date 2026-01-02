@@ -24,19 +24,16 @@ void Coin::Update(float dt) {
 
 // Metodo per disegnare la moneta
 void Coin::Draw() const {
-    // Valore che oscilla tra 0.6 e 1.0 (effetto rotazione)
-    float brightness = 0.6f + 0.4f * std::fabs(std::cos(angle));
+    
+    float bob = sin(animTime * 4.0f) * 5.0f;
 
-    // Cerchio principale della moneta
-    DrawCircleV(position, radius, Fade(GOLD, brightness));
+    Vector2 drawPos = {
+        position.x,
+        position.y + bob
+    };
 
-    // Bordo della moneta
-    DrawCircleLines(
-        (int)position.x,
-        (int)position.y,
-        radius,
-        ORANGE
-    );
+    DrawCircleV(drawPos, radius, GOLD);
+    DrawCircleLines(drawPos.x, drawPos.y, radius, ORANGE);
 }
 
 

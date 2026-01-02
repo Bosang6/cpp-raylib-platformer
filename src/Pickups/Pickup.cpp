@@ -9,3 +9,4 @@ bool Pickup::CheckCollisionPlayer(const Rectangle& charBounds) const {
     return CheckCollisionCircleRec(position, radius, charBounds);
     
 }
+

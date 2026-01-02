@@ -21,7 +21,7 @@ class PickupManager {
         // Struttura di default
         struct Defaults
         {
-            float radius = 10.f;
+            float radius = 12.f;
             // Coin
             int   coinValue  = 10;
 

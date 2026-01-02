@@ -13,10 +13,12 @@ class Pickup{
         float radius;            // Raggio del pickup
         bool collected{false};          // Stato di raccolta del pickup
 
+        float animTime = 0.0f;
+
 
     public:
         // Costruttore base
-        Pickup(Vector2 pos, float r = 10.0f) : position(pos), radius(r) {}
+        Pickup(Vector2 pos, float r) : position(pos), radius(r) {}
 
         // Distruttore virtuale
         virtual ~Pickup() = default;
