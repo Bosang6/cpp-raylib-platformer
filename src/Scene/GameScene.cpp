@@ -16,6 +16,10 @@ void GameScene::GameInit() {
     SetIsRuning(true);
 }
 
+float GameScene::GetScore() const {
+    return score;
+}
+
 void GameScene::UpdateScore(float deltaTime) {
     score += scoreIncrement * deltaTime;
 }
