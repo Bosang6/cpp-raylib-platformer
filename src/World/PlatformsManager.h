@@ -12,6 +12,7 @@ class PlatformsManager {
 public:
     static PlatformsManager& GetInstance();
 
+    void Init();
     void GeneratePlatforms();
     void DeletePlatforms();
     void DrawPlatforms();
@@ -37,13 +38,11 @@ private:
     float marginTop{200.0f};
     float marginBottom{200.0f};
 
-    // just test
-    float maxVerticleVelocity = -500.0f;
-    float moveSpeed = 150.0f; 
-    float gravity = 980.0f;
-
-    // Max distance
     
+    // Max distance
+    float maxVerticleVelocity{-500.0f};
+    float moveSpeed{150.0f}; 
+    float gravity{980.0f};
     /*
         H = v0^2 / 2g * 2(jump twice)
     */

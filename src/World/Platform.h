@@ -19,6 +19,7 @@ protected:
 public:
     Platform(const Vector2& pos, E_PlatformType t = E_PlatformType::Solid)
         : GameObject(pos) , bounds{pos.x, pos.y, width, height}, type{t} {}
+    virtual ~Platform() = default;
 
     void Draw() const override;
     virtual void UpdatePosition(float dt);
