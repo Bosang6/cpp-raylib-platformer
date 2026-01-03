@@ -8,29 +8,29 @@ Slow::Slow(Vector2 pos, float radius, float slowMultiplier, float durationSecond
     : Pickup(pos, radius), slowMultiplier(slowMultiplier), durationSeconds(durationSeconds) {}
 
 
-
 void Slow::Update(float dt) {
-    // Per ora niente animazioni, aggiunta in futuro
+    Pickup::Update(dt);
 }
+
 
 // Disegna lo slow pickup
 void Slow::Draw() const {
-    // Disegno dello slow come un cerchio blu
-    DrawCircleV(position, radius, BLUE);
-    DrawCircleLines(
-        (int)position.x,
-        (int)position.y,
-        radius,
-        DARKBLUE
-    );
+    
+    float dx = MalusShakeX();   // offset orizzontale
+    Vector2 drawPos = { position.x + dx, position.y };
 
-    // Disegno di una freccia verso il basso per indicare il rallentamento
-    DrawTriangle(
-        { position.x - radius * 0.5f, position.y - radius * 0.2f },
-        { position.x + radius * 0.5f, position.y - radius * 0.2f },
-        { position.x, position.y + radius * 0.5f },
-        DARKBLUE
-    );
+    DrawCircleV(drawPos, radius, RED);          
+    DrawCircleLines((int)drawPos.x, (int)drawPos.y, radius, BLACK);
+
+    float w = radius * 0.7f;   
+    float h = radius * 0.7f;   
+
+    Vector2 a = { drawPos.x - w * 0.5f, drawPos.y - h * 0.25f }; 
+    Vector2 b = { drawPos.x + w * 0.5f, drawPos.y - h * 0.25f }; 
+    Vector2 c = { drawPos.x,           drawPos.y + h * 0.55f };  
+
+    DrawTriangleLines(a, b, c, BLACK);
+
 }
 
 

@@ -23,14 +23,14 @@ class PickupManager {
         {
             float radius = 12.f;
             // Coin
-            int   coinValue  = 10;
+            int   coinValue  = 100;
 
             // Slow
             float slowMultiplier  = 0.6f;
             float slowDuration = 4.f;
 
             // Spring
-            float jumpMultiplier = 1.8f;
+            float jumpMultiplier = 1.6f;
 
             // ScoreMultiplier
             float scoreMultiplier = 2.f;

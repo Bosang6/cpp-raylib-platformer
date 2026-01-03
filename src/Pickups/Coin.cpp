@@ -6,14 +6,16 @@
 // #include "Character/Character.h"
 
 
-// Costruttore della moneta
+
 Coin::Coin(Vector2 pos, float radius, int value)
     : Pickup(pos, radius), value(value) {}
 
 
-// Metodo per aggiornare lo stato della moneta (es. animazioni)
+
 void Coin::Update(float dt) {
-    // Aggiorno l'angolo per l'animazione di rotazione
+    
+    Pickup::Update(dt);
+    
     angle += spinSpeed * dt;
 
     if (angle >= 2 * PI) {
@@ -22,26 +24,29 @@ void Coin::Update(float dt) {
 }    
 
 
-// Metodo per disegnare la moneta
-void Coin::Draw() const {
-    
-    float bob = sin(animTime * 4.0f) * 5.0f;
 
-    Vector2 drawPos = {
-        position.x,
-        position.y + bob
-    };
+void Coin::Draw() const
+{
+    float scaleX = GetSpinScaleX();
 
-    DrawCircleV(drawPos, radius, GOLD);
-    DrawCircleLines(drawPos.x, drawPos.y, radius, ORANGE);
+    // Disegno ellisse schiacciata
+    DrawEllipse(position.x, position.y, radius * scaleX, radius, GOLD);
+    DrawEllipseLines(position.x, position.y, radius * scaleX, radius, ORANGE);
 }
 
 
-// Cosa succede quando viene raccolto
-// Aggiunge il valore della moneta al punteggio del giocatore
+
 void Coin::OnCollect(Character& character, EffectSystem& effects) {
     collected = true;
     //character.AddScore(value, effects);
+}
+
+
+// Schiaccia la moneta
+float Coin::GetSpinScaleX() const
+{
+    float spin = fabsf(cosf(angle));
+    return minSpinScale + spin * (1.0f - minSpinScale);
 }
 
 

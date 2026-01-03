@@ -9,21 +9,23 @@ ScoreMultiplier::ScoreMultiplier(Vector2 pos, float radius, float scoreMultiplie
 
 
 
-void ScoreMultiplier::Update(float){}
+void ScoreMultiplier::Update(float dt){
+    Pickup::Update(dt);
+}
 
 
 // Disegna lo ScoreMultiplier pickup
 void ScoreMultiplier::Draw() const {
     
-    // Cerchio verde
-    DrawCircleV(position, radius, GREEN);
+    float s = BonusPulseScale();
+    float r = radius * s;
+    const char* text = "x2";
+    int fontSize = (int)(r * 0.9f);   // scala il testo col pickup
+    int textWidth = MeasureText(text, fontSize);
 
-    // Testo "x2" al centro
-    DrawText("x2",
-             (int)(position.x - 10),
-             (int)(position.y - 10),
-             20,
-             BLACK);
+    DrawCircleV(position, r, BLUE);
+    DrawCircleLines((int)position.x, (int)position.y, r, DARKBLUE);
+    DrawText(text, (int)(position.x - textWidth / 2), (int)(position.y - fontSize / 2), fontSize, BLACK);
 
 }
 

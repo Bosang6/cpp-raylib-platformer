@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include "math.h"
 
 //Forward declaration 
 class Character;
@@ -25,7 +26,7 @@ class Pickup{
 
 
         // Metodo per aggiornare lo stato del pickup
-        virtual void Update(float dt) {}
+        virtual void Update(float dt);
 
 
         // Disegna il pickup
@@ -44,5 +45,18 @@ class Pickup{
 
         // Collisione cerchio - rettangolo
         bool CheckCollisionPlayer(const Rectangle& charBounds) const;
+
+
+    protected:
+
+        float BonusPulseScale(float speed = 6.0f, float amount = 0.12f) const{
+            return 1.0f + sinf(animTime * speed) * amount;
+        }
+
+
+        float MalusShakeX(float speed = 14.0f, float pixel = 2.0f) const{
+            return sinf(animTime * speed) * pixel;
+        }
+
 
 };

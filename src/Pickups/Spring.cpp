@@ -9,23 +9,45 @@ Spring::Spring(Vector2 pos, float radius, float jumpMultiplier)
 
 
 void Spring::Update(float dt) {
-    // Per ora niente anicamzioni
+    Pickup::Update(dt);
 }
 
+// Funzione helper LOCALE a questo file per disegnare la molla
+static void DrawSpringIcon(Vector2 center, float radius, Color col)
+{
+    float pad = radius * 0.35f;
+    float top = center.y - (radius - pad);
+    float bottom = center.y + (radius - pad);
+    float amp = radius * 0.30f;
+
+    const int segments = 6;
+
+    Vector2 prev = { center.x, top };
+
+    for (int i = 1; i <= segments; ++i)
+    {
+        float t = (float)i / (float)segments;
+        float y = top + (bottom - top) * t;
+        float x = center.x + ((i % 2 == 0) ? -amp : amp);
+
+        Vector2 cur = { x, y };
+        DrawLineEx(prev, cur, 2.0f, col);
+        prev = cur;
+    }
+
+    DrawLineEx(prev, { center.x, bottom }, 2.0f, col);
+}
 
 void Spring::Draw() const {
-    // Disegno dello spring come un cerchio verde
-    DrawCircleV(position, radius, GREEN);
-    DrawCircleLines(
-        (int)position.x,
-        (int)position.y,
-        radius,
-        DARKGREEN
-    );
 
-    // Disegno di una molla stilizzata
-    DrawLine((int)position.x - radius * 0.5f, (int)position.y,
-             (int)position.x + radius * 0.5f, (int)position.y, DARKGREEN);
+    float s = BonusPulseScale();
+    float r = radius * s;
+
+    DrawCircleV(position, r, GREEN);
+    DrawCircleLines((int)position.x, (int)position.y, r, DARKGREEN);
+
+    // Icona molla interna
+    DrawSpringIcon(position, r, DARKGREEN);
 
 }
 
@@ -39,5 +61,8 @@ void Spring::OnCollect(Character& character, EffectSystem& ) {
     // Implementazione futura : effetto sonoro e visivo
 
 }
+
+
+
 
 

@@ -8,7 +8,10 @@ class Coin : public Pickup {
     private:
         float angle{0.0f};              // Angolo per l'animazione di rotazione
         float spinSpeed{4.0f};          // Velocità di rotazione
+        float minSpinScale{0.2f};
         int value;                   // Valore della moneta
+
+
 
     public:
 
@@ -26,5 +29,10 @@ class Coin : public Pickup {
 
         // Cosa succede quando viene raccolto
         void OnCollect(Character& character, EffectSystem& effects) override;
+
+
+    private:
+
+        float GetSpinScaleX() const;
 
 };
