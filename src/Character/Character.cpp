@@ -6,7 +6,7 @@ Character::Character(Vector2 startPos, Vector2 charSize)
     , size(charSize)
     , isOnGround(false)
     , gravity(980.0f)
-    , moveSpeed(150.0f)
+    , moveSpeed(200.0f)
     , maxFallSpeed(1000.0f)
 {
 }
