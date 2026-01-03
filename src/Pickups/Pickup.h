@@ -49,11 +49,12 @@ class Pickup{
 
     protected:
 
+        // Bonus : Pulse morbido
         float BonusPulseScale(float speed = 6.0f, float amount = 0.12f) const{
             return 1.0f + sinf(animTime * speed) * amount;
         }
 
-
+        // Malus : Shake orizzontale
         float MalusShakeX(float speed = 14.0f, float pixel = 2.0f) const{
             return sinf(animTime * speed) * pixel;
         }

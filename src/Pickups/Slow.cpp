@@ -16,7 +16,7 @@ void Slow::Update(float dt) {
 // Disegna lo slow pickup
 void Slow::Draw() const {
     
-    float dx = MalusShakeX();   // offset orizzontale
+    float dx = MalusShakeX();   
     Vector2 drawPos = { position.x + dx, position.y };
 
     DrawCircleV(drawPos, radius, RED);          

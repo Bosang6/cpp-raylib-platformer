@@ -23,7 +23,12 @@ void Coin::Update(float dt) {
     }
 }    
 
-
+// Schiaccia la moneta
+float Coin::GetSpinScaleX() const
+{
+    float spin = fabsf(cosf(angle));
+    return minSpinScale + spin * (1.0f - minSpinScale);
+}
 
 void Coin::Draw() const
 {
@@ -42,12 +47,7 @@ void Coin::OnCollect(Character& character, EffectSystem& effects) {
 }
 
 
-// Schiaccia la moneta
-float Coin::GetSpinScaleX() const
-{
-    float spin = fabsf(cosf(angle));
-    return minSpinScale + spin * (1.0f - minSpinScale);
-}
+
 
 
 
