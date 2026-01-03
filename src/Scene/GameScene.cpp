@@ -14,6 +14,8 @@ GameScene::GameScene() {
 void GameScene::GameInit() {
     platformsManager.GeneratePlatforms();
     SetIsRuning(true);
+    score = 0.0f;
+    instructionsTimer = 5.0f;
 }
 
 float GameScene::GetScore() const {
@@ -96,9 +98,13 @@ void GameScene::Update() {
 
         // UI
         DrawScore(); 
-        if (instructionTimer > 0) { 
-            DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, DARKGRAY);
-            DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, DARKGRAY);
+        if (instructionsTimer > 0) { 
+            // Calcola l'alpha basato sul timer (fade negli ultimi 2 secondi)
+            float alpha = instructionsTimer < 2.0f ? instructionsTimer / 2.0f : 1.0f;
+            Color textColor = Fade(DARKGRAY, alpha);
+            
+            DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, textColor);
+            DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, textColor);
         }
         //---------------------------------
     EndDrawing();
