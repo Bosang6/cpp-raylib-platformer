@@ -5,8 +5,14 @@ PlatformsManager& PlatformsManager::GetInstance() {
     return instance;
 }
 
+<<<<<<< HEAD
 PlatformsManager::~PlatformsManager() {
     Platform::UnloadTextures();
+=======
+void PlatformsManager::Init(){
+    platforms.clear();
+    lastGeneratedY = Game::height;
+>>>>>>> 4b9bab947568a5a68f2ba5672c638eaf9d6aabe1
 }
 
 void PlatformsManager::GeneratePlatforms() {
@@ -49,10 +55,13 @@ void PlatformsManager::GenerateOne(){
         newX = RandFloat(left, right); // Platform Size: 80*20
     }
 
+    // generate a platform
     float generateProbablity = RandFloat(0.0f, 10.0f);
-
-    // Generate a BreakablePlatform with 30% probability
-    if(generateProbablity > 7.0f && generateProbablity < 10.0f){
+    E_PlatformType t = E_PlatformType::Solid;
+    if(platforms.size() > 0)
+        t = platforms.front().get()->GetType();
+    // Generate a BreakablePlatform with 30% probability and the last platform generated was not breakable.
+    if(generateProbablity > 7.0f && generateProbablity < 10.0f && t != E_PlatformType::Breakable){
         platforms.push_front(std::make_unique<BreakablePlatform>(Vector2{newX, newY}));
     }
     else if(generateProbablity > 4.0f && generateProbablity <= 7.0f){

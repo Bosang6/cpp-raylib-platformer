@@ -23,8 +23,14 @@ protected:
     static bool texturesLoaded;
 
 public:
+<<<<<<< HEAD
     Platform(const Vector2& pos, E_PlatformType t = E_PlatformType::Solid); // ← SOLO DICHIARAZIONE
     virtual ~Platform();
+=======
+    Platform(const Vector2& pos, E_PlatformType t = E_PlatformType::Solid)
+        : GameObject(pos) , bounds{pos.x, pos.y, width, height}, type{t} {}
+    virtual ~Platform() = default;
+>>>>>>> 4b9bab947568a5a68f2ba5672c638eaf9d6aabe1
 
     virtual void Draw() const;
     virtual void UpdatePosition(float dt);

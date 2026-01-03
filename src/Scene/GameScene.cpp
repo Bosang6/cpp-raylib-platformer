@@ -12,6 +12,7 @@ GameScene::GameScene() {
 }
 
 void GameScene::GameInit() {
+    platformsManager.Init();
     platformsManager.GeneratePlatforms();
     SetIsRuning(true);
     score = 0.0f;
