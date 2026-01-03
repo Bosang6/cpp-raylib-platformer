@@ -21,6 +21,6 @@ public:
     Game();
     ~Game();
     void Start();
-    void ChangeScene(const E_SceneType type);
+    void ChangeScene(const E_SceneType type, float scoreData = 0.0f);
     void SetSceneTyoe(E_SceneType sceneType);
 };

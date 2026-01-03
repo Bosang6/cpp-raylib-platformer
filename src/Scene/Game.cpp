@@ -24,7 +24,9 @@ void Game::Start(){
         }
         else if(currentSceneType == E_SceneType::Game){
             if(!dynamic_cast<GameScene*>(currentScene)->GetIsRunning()){
-                ChangeScene(E_SceneType::End);
+                // Salva il punteggio prima di cambiare scena
+                float finalScore = dynamic_cast<GameScene*>(currentScene)->GetScore();
+                ChangeScene(E_SceneType::End, finalScore);
             }
         }
         else if(currentSceneType == E_SceneType::End && IsKeyPressed(KEY_ENTER)){
@@ -34,7 +36,7 @@ void Game::Start(){
     }
 }
 
-void Game::ChangeScene(const E_SceneType type){
+void Game::ChangeScene(const E_SceneType type, float scoreData){
     delete currentScene;
     switch (type)
     {
@@ -45,7 +47,7 @@ void Game::ChangeScene(const E_SceneType type){
         currentScene = new GameScene();
         break;
     case E_SceneType::End:
-        currentScene = new EndScene();
+        currentScene = new EndScene(scoreData);
         break;
     }
     currentSceneType = type;
