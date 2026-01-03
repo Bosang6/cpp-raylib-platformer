@@ -13,7 +13,7 @@ void EndScene::Update() {
     BeginDrawing();
     ClearBackground(RAYWHITE);
     DrawText("GAME OVER!", Game::width / 2 - MeasureText("GAME OVER!", 50) / 2, 
-    Game::height / 2 - 50 / 2, 50, DARKGRAY);
+    Game::height / 2 - 150 / 2, 50, DARKGRAY);
 
      // Punteggio finale
     const char* scoreText = TextFormat("Final Score: %d", (int)score);
