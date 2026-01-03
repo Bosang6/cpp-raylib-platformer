@@ -2,7 +2,6 @@
 #include "ISceneUpdate.h"
 #include "raylib.h"
 #include "World/PlatformsManager.h"
-
 #include "Character/Playable_character.h"
 #include "Pickups/PickupManager.h"
 #include "Pickups/EffectSystem.h"
@@ -16,6 +15,8 @@ public:
     PlayableCharacter player{{200, 100}, {30, 50}};
     bool GetIsRunning() const;
     void SetIsRuning(bool isRunning);
+    float GetScore() const;
+    //void AddScore(float amount);
 
 private:
     void GameInit();
@@ -25,6 +26,14 @@ private:
     PlatformsManager& platformsManager = PlatformsManager::GetInstance();
     PickupManager pickupManager;
     EffectSystem effects;
+
+    // Sistema di punteggio
+    float score{0.0f};
+    float scoreIncrement{10.0f};
+
+    // Dichiarazione delle funzioni
+    void UpdateScore(float deltaTime);
+    void DrawScore();
 };
 
 

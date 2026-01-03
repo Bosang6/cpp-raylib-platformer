@@ -16,12 +16,29 @@ void GameScene::GameInit() {
     SetIsRuning(true);
 }
 
+void GameScene::UpdateScore(float deltaTime) {
+    score += scoreIncrement * deltaTime;
+}
+
+void GameScene::DrawScore() {
+    const char* scoreText = TextFormat("Score: %d", (int)score);
+    int textWidth = MeasureText(scoreText, 30);
+    
+    DrawText(scoreText, Game::width - textWidth - 15, 11, 30, BLACK);
+    DrawText(scoreText, Game::width - textWidth - 15, 10, 30, WHITE);
+}
+
 void GameScene::Update() {
     // Game scene update logic goes here
 
     BeginDrawing();
         ClearBackground(Color{135, 206, 235, 255});
         float deltaTime = GetFrameTime();
+
+        // Aggiorna punteggio (solo se il gioco è in corso)
+        if(isRunning) {
+            UpdateScore(deltaTime);
+        }
 
         // platforms update
         platformsManager.GeneratePlatforms();
@@ -68,11 +85,13 @@ void GameScene::Update() {
         player.Draw();
         pickupManager.Draw();
 
+        // Controlla se il giocatore è caduto sotto lo schermo (Game Over)
         if(player.GetVelocity().y >= 1000 && playerBounds.y > Game::height){
             SetIsRuning(false);
         }
 
         // UI
+        DrawScore(); 
         DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, DARKGRAY);
         DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, DARKGRAY);
         //---------------------------------
