@@ -26,7 +26,8 @@ private:
     PlatformsManager& platformsManager = PlatformsManager::GetInstance();
     PickupManager pickupManager;
     EffectSystem effects;
-
+    float instructionTimer{5.0f};
+    
     // Sistema di punteggio
     float score{0.0f};
     float scoreIncrement{10.0f};

@@ -96,8 +96,10 @@ void GameScene::Update() {
 
         // UI
         DrawScore(); 
-        DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, DARKGRAY);
-        DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, DARKGRAY);
+        if (instructionTimer > 0) { 
+            DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, DARKGRAY);
+            DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, DARKGRAY);
+        }
         //---------------------------------
     EndDrawing();
 }
