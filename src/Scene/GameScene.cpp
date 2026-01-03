@@ -59,7 +59,7 @@ void GameScene::Update() {
         // effects and player update
         effects.Update(deltaTime);
         player.Update(deltaTime, effects);
-        pickupManager.Update(deltaTime, player, effects);
+        pickupManager.Update(deltaTime, player, effects, score);
 
         Rectangle playerBounds = player.GetBounds();
         // Collisione temporanea con piattaforma (per testare)

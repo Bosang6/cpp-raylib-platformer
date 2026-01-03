@@ -44,7 +44,7 @@ void PickupManager::Spawn(Type type, Vector2 pos){
 
 
 
-void PickupManager::Update(float dt, Character& character, EffectSystem& effects) {
+void PickupManager::Update(float dt, Character& character, EffectSystem& effects, float& score) {
     // 1. Updtate + Collisione
     for(auto& p : pickups) {
         // p è un reference(&) a un puntatore unico (unique_ptr<Pickup>)
@@ -54,6 +54,13 @@ void PickupManager::Update(float dt, Character& character, EffectSystem& effects
         // Controllo cerchio - rettangolo tra pickup e giocatore
         if(!p->IsCollected() && p->CheckCollisionPlayer(character.GetBounds())) {
             p->OnCollect(character, effects);
+
+            if(auto coin = dynamic_cast<Coin*>(p.get())){
+
+                float addScore = coin->GetValue() * effects.GetScoreMultiplier();
+                score += addScore;
+
+            }
         }
     }
 
