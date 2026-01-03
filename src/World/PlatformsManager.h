@@ -23,7 +23,7 @@ public:
     
 private:
     PlatformsManager() = default;
-    ~PlatformsManager() = default;
+    ~PlatformsManager();
 
     float RandFloat(const float a, const float b);
     void GenerateOne();

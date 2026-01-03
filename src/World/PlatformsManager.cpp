@@ -5,6 +5,10 @@ PlatformsManager& PlatformsManager::GetInstance() {
     return instance;
 }
 
+PlatformsManager::~PlatformsManager() {
+    Platform::UnloadTextures();
+}
+
 void PlatformsManager::GeneratePlatforms() {
     while(lastGeneratedY > 10.0f){
         GenerateOne();

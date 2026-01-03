@@ -3,10 +3,25 @@
 void BreakablePlatform::Draw() const {
     if(broken) return;
 
-    unsigned char alpha = static_cast<unsigned char>(255 *(breakTimer/breakDelay));
-    Color c{230, 41, 55, alpha};
-    DrawRectangleRounded(bounds, 0.2f, 10, c);
+    unsigned char alpha = static_cast<unsigned char>(255 * (breakTimer / breakDelay));
+    
+    if(texturesLoaded && textureBreakable.id > 0) {
+        // Disegna con texture e fade-out
+        DrawTexturePro(
+            textureBreakable,
+            {0, 0, (float)textureBreakable.width, (float)textureBreakable.height},
+            bounds,
+            {0, 0},
+            0.0f,
+            Color{255, 255, 255, alpha}
+        );
+    } else {
+        // Fallback
+        Color c{230, 41, 55, alpha};
+        DrawRectangleRounded(bounds, 0.2f, 10, c);
+    }
 }
+
 
 void BreakablePlatform::UpdatePosition(float dt){
     if(broken) return;

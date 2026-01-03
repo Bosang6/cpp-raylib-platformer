@@ -38,7 +38,7 @@ void GameScene::Update() {
     // Game scene update logic goes here
 
     BeginDrawing();
-        ClearBackground(Color{135, 206, 235, 255});
+    ClearBackground(Color{89, 125, 206, 255}); // Blu medio
         float deltaTime = GetFrameTime();
 
         // Decrementa il timer delle istruzioni SEMPRE (fuori da if(isRunning))

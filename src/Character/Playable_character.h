@@ -13,10 +13,18 @@ private:
     float animationTimer;
     float bounceOffset;
     bool facingRight;
+
+    // Sprite sheet
+    Texture2D spriteSheet;
+    Rectangle currentFrame;
+    int frameIndex;
+    float frameTime;
+    bool hasTexture;
     
 public:
     PlayableCharacter(Vector2 startPos, Vector2 charSize);
-    
+     ~PlayableCharacter();
+     
     // Override metodi base
     void Update(float deltaTime, const EffectSystem& effects);
     void Draw() override;

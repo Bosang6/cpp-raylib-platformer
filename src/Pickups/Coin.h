@@ -12,12 +12,18 @@ class Coin : public Pickup {
         float minSpinScale{0.2f};
         int value;                   // Valore della moneta
 
+        static Texture2D spriteSheet;
+        static bool textureLoaded;
+        static int instanceCount;
+        Rectangle currentFrame;
+        int frameIndex;
+        float frameTime;
 
     public:
 
         // Costruttore della moneta
         Coin(Vector2 pos, float radius, int value);
-
+        ~Coin();
 
         // Metodo per aggiornare lo stato della moneta (es. animazioni)
         void Update(float dt) override;
@@ -38,4 +44,6 @@ class Coin : public Pickup {
 
         float GetSpinScaleX() const;
 
+        static void LoadSpriteSheet();
+        static void UnloadSpriteSheet();
 };
