@@ -29,14 +29,14 @@ void PlayableCharacter::Update(float deltaTime, const EffectSystem& effects) {
         bounceOffset = 0.0f;
     }
     
-    /* Wrap-around orizzontale
+    //Wrap-around orizzontale
     if (position.x + size.x < 0) {
-        position.x = 800; || or GetScreenWidth()
+        position.x = GetScreenWidth();
     }
-    else if (position.x > 800) {
+    else if (position.x > GetScreenWidth()) {
         position.x = -size.x;
     }
-    */
+    
 }
 
 void PlayableCharacter::Draw() {
