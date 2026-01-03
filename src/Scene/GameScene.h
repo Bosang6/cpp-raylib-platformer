@@ -1,4 +1,4 @@
-#pragma onece
+#pragma once
 #include "ISceneUpdate.h"
 #include "raylib.h"
 #include "World/PlatformsManager.h"
@@ -16,8 +16,7 @@ public:
     bool GetIsRunning() const;
     void SetIsRuning(bool isRunning);
     float GetScore() const;
-    //void AddScore(float amount);
-
+    
 private:
     void GameInit();
 

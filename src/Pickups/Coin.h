@@ -2,6 +2,7 @@
 #include "Pickup.h"
 
 
+
 // Classe che rappresenta una moneta nel gioco
 class Coin : public Pickup {
     
@@ -10,7 +11,6 @@ class Coin : public Pickup {
         float spinSpeed{4.0f};          // Velocità di rotazione
         float minSpinScale{0.2f};
         int value;                   // Valore della moneta
-
 
 
     public:
@@ -29,6 +29,9 @@ class Coin : public Pickup {
 
         // Cosa succede quando viene raccolto
         void OnCollect(Character& character, EffectSystem& effects) override;
+
+        
+        int GetValue() const {return value;}
 
 
     private:

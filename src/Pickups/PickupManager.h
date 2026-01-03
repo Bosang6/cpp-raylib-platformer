@@ -50,7 +50,7 @@ class PickupManager {
         
         void Spawn(Type type, Vector2 pos);
 
-        void Update(float dt, Character& character, EffectSystem& effects);
+        void Update(float dt, Character& character, EffectSystem& effects, float& score);
         void Draw() const;
 
 

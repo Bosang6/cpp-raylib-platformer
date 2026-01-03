@@ -2,14 +2,10 @@
 #include "raylib.h"
 #include "cmath"
 
-// Se mi servirà usare Character.AddScore
-// #include "Character/Character.h"
-
 
 
 Coin::Coin(Vector2 pos, float radius, int value)
     : Pickup(pos, radius), value(value) {}
-
 
 
 void Coin::Update(float dt) {
@@ -23,12 +19,14 @@ void Coin::Update(float dt) {
     }
 }    
 
+
 // Schiaccia la moneta
 float Coin::GetSpinScaleX() const
 {
     float spin = fabsf(cosf(angle));
     return minSpinScale + spin * (1.0f - minSpinScale);
 }
+
 
 void Coin::Draw() const
 {
@@ -43,13 +41,7 @@ void Coin::Draw() const
 
 void Coin::OnCollect(Character& character, EffectSystem& effects) {
     collected = true;
-    //character.AddScore(value, effects);
+
 }
-
-
-
-
-
-
 
 
