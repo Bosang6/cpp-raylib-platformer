@@ -10,3 +10,8 @@ void EndScene::Update() {
     ,  Game::height / 2 + 50, 20, DARKGRAY);
     EndDrawing();
 }
+
+void EndScene::Draw() {
+    float finalScore = gameScene->GetScore();
+    DrawText(TextFormat("Final Score: %d", (int)finalScore), 100, 200, 40, WHITE);
+}
