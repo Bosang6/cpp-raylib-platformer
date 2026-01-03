@@ -41,6 +41,11 @@ void GameScene::Update() {
         ClearBackground(Color{135, 206, 235, 255});
         float deltaTime = GetFrameTime();
 
+        // Decrementa il timer delle istruzioni SEMPRE (fuori da if(isRunning))
+        if(instructionsTimer > 0) {
+            instructionsTimer -= deltaTime;
+        }
+
         // Aggiorna punteggio (solo se il gioco è in corso)
         if(isRunning) {
             UpdateScore(deltaTime);
