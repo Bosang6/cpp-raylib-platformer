@@ -1,5 +1,6 @@
 #include "GameScene.h"
 
+
 GameScene::GameScene() {
     GameInit();
 
@@ -8,7 +9,7 @@ GameScene::GameScene() {
     pickupManager.Spawn(PickupManager::Type::Slow, {200, 80});
     pickupManager.Spawn(PickupManager::Type::ScoreMultiplier, {100, 80});
     pickupManager.Spawn(PickupManager::Type::Spring, {50, 80});
-    // ------------------------
+    // ------------------------   
 }
 
 void GameScene::GameInit() {
@@ -112,8 +113,8 @@ void GameScene::Update() {
             DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, textColor);
         }
         //---------------------------------
-    EndDrawing();
-}
+
+    }
 
 bool GameScene::GetIsRunning() const {
     return isRunning;
