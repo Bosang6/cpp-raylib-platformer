@@ -68,8 +68,8 @@ void GameScene::Update() {
         // Collisione temporanea con piattaforma (per testare)
         for(auto& platform : platformsManager.GetPlatforms()){
             if (CheckCollisionRecs(playerBounds, platform->GetBounds()) && 
-                playerBounds.y + playerBounds.height < platform->GetBounds().y + 10 &&
-                player.GetVelocity().y > 0) {
+                player.GetVelocity().y > 0 &&
+                playerBounds.y + playerBounds.height - player.GetVelocity().y * GetFrameTime() <= platform->GetBounds().y) {
 
                 // skip the collision handling when the platform is broken
                 auto* bp = dynamic_cast<BreakablePlatform*>(platform.get());
