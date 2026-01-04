@@ -12,6 +12,7 @@ GameScene::GameScene() {
 }
 
 void GameScene::GameInit() {
+    backgroundMusic.Init();
     platformsManager.Init();
     platformsManager.GeneratePlatforms();
     SetIsRuning(true);
@@ -36,6 +37,7 @@ void GameScene::DrawScore() {
 }
 
 void GameScene::Update() {
+    backgroundMusic.Play();
     // Game scene update logic goes here
 
     BeginDrawing();
@@ -100,6 +102,7 @@ void GameScene::Update() {
         // Controlla se il giocatore è caduto sotto lo schermo (Game Over)
         if(player.GetVelocity().y >= 1000 && playerBounds.y > Game::height){
             SetIsRuning(false);
+            backgroundMusic.Close();
         }
 
         // UI

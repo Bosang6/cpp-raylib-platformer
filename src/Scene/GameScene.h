@@ -5,7 +5,7 @@
 #include "Character/Playable_character.h"
 #include "Pickups/PickupManager.h"
 #include "Pickups/EffectSystem.h"
-
+#include "Audio/BackgroundMusic.h"
 
 class GameScene : public ISceneUpdate
 {
@@ -34,6 +34,8 @@ private:
     // Dichiarazione delle funzioni
     void UpdateScore(float deltaTime);
     void DrawScore();
+
+    BackgroundMusic backgroundMusic{"assets/audio/background.mp3"};
 };
 
 
