@@ -5,14 +5,13 @@ PlatformsManager& PlatformsManager::GetInstance() {
     return instance;
 }
 
-<<<<<<< HEAD
 PlatformsManager::~PlatformsManager() {
     Platform::UnloadTextures();
-=======
+}
+
 void PlatformsManager::Init(){
     platforms.clear();
     lastGeneratedY = Game::height;
->>>>>>> 4b9bab947568a5a68f2ba5672c638eaf9d6aabe1
 }
 
 void PlatformsManager::GeneratePlatforms() {

@@ -16,21 +16,15 @@ protected:
     static constexpr float height{20.0f};
     float moveDownVelocity{125.0f};
     
-    // Texture
+    // Texture statiche
     static Texture2D textureNormal;
     static Texture2D textureBreakable;
     static Texture2D textureMoving;
     static bool texturesLoaded;
 
 public:
-<<<<<<< HEAD
-    Platform(const Vector2& pos, E_PlatformType t = E_PlatformType::Solid); // ← SOLO DICHIARAZIONE
+    Platform(const Vector2& pos, E_PlatformType t = E_PlatformType::Solid);
     virtual ~Platform();
-=======
-    Platform(const Vector2& pos, E_PlatformType t = E_PlatformType::Solid)
-        : GameObject(pos) , bounds{pos.x, pos.y, width, height}, type{t} {}
-    virtual ~Platform() = default;
->>>>>>> 4b9bab947568a5a68f2ba5672c638eaf9d6aabe1
 
     virtual void Draw() const;
     virtual void UpdatePosition(float dt);

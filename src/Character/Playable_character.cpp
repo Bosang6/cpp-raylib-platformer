@@ -67,11 +67,13 @@ void PlayableCharacter::Update(float deltaTime, const EffectSystem& effects) {
     }
         
     // Effetto "bounce" quando è a terra
-    if (isOnGround) {
+    /* if (isOnGround) {
         bounceOffset = sin(animationTimer * 8.0f) * 2.0f;
     } else {
         bounceOffset = 0.0f;
     }
+    */
+    bounceOffset = 0.0f;
     
     // Wrap-around orizzontale
     if (position.x + size.x < 0) {

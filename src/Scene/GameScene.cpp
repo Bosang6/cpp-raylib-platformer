@@ -66,7 +66,7 @@ void GameScene::Update() {
         // Collisione temporanea con piattaforma (per testare)
         for(auto& platform : platformsManager.GetPlatforms()){
             if (CheckCollisionRecs(playerBounds, platform->GetBounds()) && 
-                playerBounds.y + playerBounds.height < platform->GetBounds().y + platform->GetBounds().height &&
+                playerBounds.y + playerBounds.height < platform->GetBounds().y + 10 &&
                 player.GetVelocity().y > 0) {
 
                 // skip the collision handling when the platform is broken
@@ -83,7 +83,7 @@ void GameScene::Update() {
                 }
 
                 player.SetOnGround(true);
-                player.SetPosition({player.GetPosition().x, platform->position.y - 50});
+                player.SetPosition({player.GetPosition().x, platform->position.y - playerBounds.height});
                 player.SetVelocity({player.GetVelocity().x, 0});
                 player.OnLandOnPlatform();
 

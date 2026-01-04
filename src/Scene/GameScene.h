@@ -12,7 +12,7 @@ class GameScene : public ISceneUpdate
 public:
     GameScene();
     void Update() override;
-    PlayableCharacter player{{200, 100}, {30, 50}};
+    PlayableCharacter player{{200, 100}, {64, 96}};
     bool GetIsRunning() const;
     void SetIsRuning(bool isRunning);
     float GetScore() const;
