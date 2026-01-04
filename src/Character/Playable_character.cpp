@@ -7,7 +7,7 @@ PlayableCharacter::PlayableCharacter(Vector2 startPos, Vector2 charSize)
     , maxJumps(2)
     , jumpForce(-500.0f)
     , animationTimer(0.0f)
-    , bounceOffset(0.0f)
+    //, bounceOffset(0.0f)
     , facingRight(true)
     , frameIndex(0)
     , frameTime(0.0f)
@@ -73,7 +73,7 @@ void PlayableCharacter::Update(float deltaTime, const EffectSystem& effects) {
         bounceOffset = 0.0f;
     }
     */
-    bounceOffset = 0.0f;
+    //bounceOffset = 0.0f;
     
     // Wrap-around orizzontale
     if (position.x + size.x < 0) {
@@ -90,7 +90,7 @@ void PlayableCharacter::Draw() {
         Rectangle source = currentFrame;
         Rectangle dest = {
             position.x,
-            position.y - bounceOffset,
+            position.y /*- bounceOffset*/,
             size.x,
             size.y
         };
@@ -129,16 +129,16 @@ void PlayableCharacter::Draw() {
         Color bodyColor = SKYBLUE;
         
         DrawCircleV(
-            Vector2{centerX, centerY - bounceOffset}, 
+            Vector2{centerX, centerY /*- bounceOffset*/}, 
             bodyRadius, 
             bodyColor
         );
         
         // Bordo del corpo (per dare profondità)
-        DrawCircleLines(centerX, centerY - bounceOffset, bodyRadius, BLUE);
+        DrawCircleLines(centerX, centerY /*- bounceOffset*/, bodyRadius, BLUE);
         
         // === TESTA ===
-        float headY = position.y + 10 - bounceOffset;
+        float headY = position.y + 10 /*- bounceOffset*/;
         float headRadius = 8;
         
         DrawCircleV(
