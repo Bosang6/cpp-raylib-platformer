@@ -19,7 +19,7 @@ float GameScene::GetScore() const {
 }
 
 void GameScene::UpdateScore(float deltaTime) {
-    score += scoreIncrement * deltaTime;
+    score += scoreIncrement * deltaTime * effects.GetScoreMultiplier();
 }
 
 void GameScene::DrawScore() {
@@ -57,7 +57,8 @@ void GameScene::Update() {
         pickupManager.GeneratePickups();
         effects.Update(deltaTime);
         player.Update(deltaTime, effects);
-        pickupManager.Update(deltaTime, player, effects, score);
+        ui.Update(deltaTime);
+        pickupManager.Update(deltaTime, player, effects, score, ui);
 
         Rectangle playerBounds = player.GetBounds();
         // Collisione temporanea con piattaforma (per testare)
@@ -110,6 +111,9 @@ void GameScene::Update() {
             DrawText("Use A/D or Arrow Keys to move", 10, 60, 20, textColor);
             DrawText("Press SPACE to jump (double jump available)", 10, 85, 20, textColor);
         }
+        effectsUI.Draw(effects);
+        ui.Draw();
+        
         //---------------------------------
     EndDrawing();
 }

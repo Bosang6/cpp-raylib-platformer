@@ -18,6 +18,7 @@ class Coin : public Pickup {
         Rectangle currentFrame;
         int frameIndex;
         float frameTime;
+        float drawScale{2.0f};
 
     public:
 

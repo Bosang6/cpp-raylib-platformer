@@ -62,6 +62,9 @@ void Spring::OnCollect(Character& character, EffectSystem& ) {
 
 }
 
+const char* Spring::GetCollectMessage() const { return "JUMP BOOST"; }
+
+
 
 
 

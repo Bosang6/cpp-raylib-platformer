@@ -36,3 +36,9 @@ void ScoreMultiplier::OnCollect(Character&, EffectSystem& effects){
 
     effects.AddEffect(EffectSystem::EffectType::ScoreMultiplier, durationSeconds, scoreMultiplier);
 }
+
+
+const char* ScoreMultiplier::GetCollectMessage() const {
+    return "Score x2";
+}
+

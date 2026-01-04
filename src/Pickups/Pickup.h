@@ -46,6 +46,9 @@ class Pickup{
         // Collisione cerchio - rettangolo
         bool CheckCollisionPlayer(const Rectangle& charBounds) const;
 
+        // 
+        virtual const char* GetCollectMessage() const { return nullptr; }
+
 
     protected:
 

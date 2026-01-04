@@ -94,3 +94,15 @@ float EffectSystem::GetScoreMultiplier() const {
     return scoreMultiplier;
     
 }
+
+
+std::vector<EffectSystem::ActiveEffectInfo> EffectSystem::GetActiveEffects() const
+{
+    std::vector<ActiveEffectInfo> out;
+    out.reserve(effects.size());
+
+    for (const auto& e : effects)
+        out.push_back({ e.type, e.remainingTime, e.value });
+
+    return out;
+}

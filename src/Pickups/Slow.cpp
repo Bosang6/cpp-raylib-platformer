@@ -43,3 +43,6 @@ void Slow::OnCollect(Character&, EffectSystem& effects) {
 
     // Implementazione futura : effetto sonoro e visivo
 }
+
+const char* Slow::GetCollectMessage() const { return "SLOW"; }
+

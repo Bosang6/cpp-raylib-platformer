@@ -6,6 +6,7 @@
 #include "ScoreMultiplier.h"
 #include "Character/Character.h"
 #include "EffectSystem.h"
+#include "UI/UIPickMessage.h"
 #include <algorithm>
 
 
@@ -44,7 +45,7 @@ void PickupManager::Spawn(Type type, Vector2 pos){
 
 
 
-void PickupManager::Update(float dt, Character& character, EffectSystem& effects, float& score) {
+void PickupManager::Update(float dt, Character& character, EffectSystem& effects, float& score, UIPickMessage& ui) {
     // 1. Updtate + Collisione
     for(auto& p : pickups) {
         // p è un reference(&) a un puntatore unico (unique_ptr<Pickup>)
@@ -52,14 +53,22 @@ void PickupManager::Update(float dt, Character& character, EffectSystem& effects
         p->Update(dt);
 
         // Controllo cerchio - rettangolo tra pickup e giocatore
-        if(!p->IsCollected() && p->CheckCollisionPlayer(character.GetBounds())) {
+        if (!p->IsCollected() && p->CheckCollisionPlayer(character.GetBounds()))
+        {
             p->OnCollect(character, effects);
 
-            if(auto coin = dynamic_cast<Coin*>(p.get())){
-
-                float addScore = coin->GetValue() * effects.GetScoreMultiplier();
-                score += addScore;
-
+            // Coin: testo dinamico + punteggio
+            if (auto coin = dynamic_cast<Coin*>(p.get()))
+            {
+                float added = coin->GetValue() * effects.GetScoreMultiplier();
+                score += added;
+                ui.Push(TextFormat("Score +%.0f", added));
+            }
+            else
+            {
+                // Tutti gli altri: messaggio polimorfico
+                if (const char* msg = p->GetCollectMessage())
+                    ui.Push(msg);
             }
         }
     }

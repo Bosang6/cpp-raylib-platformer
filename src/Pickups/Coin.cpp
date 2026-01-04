@@ -74,19 +74,24 @@ float Coin::GetSpinScaleX() const
 
 void Coin::Draw() const {
      if(textureLoaded) {
+
+        float rDraw = radius * drawScale;
+
         // Disegna Sprite animato
         Rectangle dest = {
             position.x - radius,
             position.y - radius,
-            radius * 2,
-            radius * 2
+            rDraw * 2,
+            rDraw * 2
         };
+
+        Vector2 origin = {dest.width * 0.5f , dest.height * 0.5f};
         
         DrawTexturePro(
             spriteSheet,
             currentFrame,
             dest,
-            {radius, radius},
+            origin,
             0.0f,
             WHITE
         );
@@ -96,6 +101,10 @@ void Coin::Draw() const {
     // Disegno ellisse schiacciata
     DrawEllipse(position.x, position.y, radius * scaleX, radius, GOLD);
     DrawEllipseLines(position.x, position.y, radius * scaleX, radius, ORANGE);
+
+    // debug
+    DrawCircleLines((int)position.x,(int)position.y, radius, RED);
+
     }    
 }
 
@@ -103,5 +112,3 @@ void Coin::OnCollect(Character& character, EffectSystem& effects) {
     collected = true;
 
 }
-
-

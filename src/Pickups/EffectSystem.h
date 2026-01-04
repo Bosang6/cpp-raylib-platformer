@@ -14,6 +14,13 @@ class EffectSystem{
             ScoreMultiplier
         };
 
+        // read-only per UI
+        struct ActiveEffectInfo {
+            EffectType type;
+            float remainingTime;
+            float value;
+        };
+
 
     private:
         // Struttura che rappresenta una singola istanza di effetto attivo
@@ -45,5 +52,6 @@ class EffectSystem{
         // Getter : moltiplicatore di punteggio 
         float GetScoreMultiplier() const;
 
-        // In futuro aggiungere ScoreMultiplier e ReverseControls
+        // per UI
+        std::vector<ActiveEffectInfo> GetActiveEffects() const;
 };

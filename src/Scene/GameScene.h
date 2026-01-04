@@ -6,6 +6,9 @@
 #include "Pickups/PickupManager.h"
 #include "Pickups/EffectSystem.h"
 #include "Audio/BackgroundMusic.h"
+#include "UI/UIPickMessage.h"
+#include "UI/UIStatusEffects.h"
+
 
 class GameScene : public ISceneUpdate
 {
@@ -25,6 +28,8 @@ private:
     PlatformsManager& platformsManager = PlatformsManager::GetInstance();
     PickupManager pickupManager;
     EffectSystem effects;
+    UIPickMessage ui;
+    UIStatusEffects effectsUI;
     float instructionsTimer{5.0f};
     
     // Sistema di punteggio

@@ -10,6 +10,7 @@
 class Pickup;
 class Character;
 class EffectSystem;
+class UIPickMessage;
 
 
 // Classe per gestire tutti i pickup presenti nel gioco
@@ -29,14 +30,14 @@ class PickupManager {
 
             // Slow
             float slowMultiplier  = 0.6f;
-            float slowDuration = 4.f;
+            float slowDuration = 12.f;
 
             // Spring
             float jumpMultiplier = 1.6f;
 
             // ScoreMultiplier
             float scoreMultiplier = 2.f;
-            float scoreDuration = 6.f;
+            float scoreDuration = 15.f;
         };
 
 
@@ -52,7 +53,7 @@ class PickupManager {
 
 
     public:
-        void Update(float dt, Character& character, EffectSystem& effects, float& score);
+        void Update(float dt, Character& character, EffectSystem& effects, float& score, UIPickMessage& ui);
         void Draw() const;
 
 
