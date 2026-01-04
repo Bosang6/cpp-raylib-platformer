@@ -3,6 +3,8 @@
 #include <memory>
 #include "raylib.h"
 #include "Pickup.h"
+#include "Scene/Game.h"
+#include <random>
 
 
 class Pickup;
@@ -45,16 +47,23 @@ class PickupManager {
         std::vector<std::unique_ptr<Pickup>> pickups;  
         void Add(std::unique_ptr<Pickup> pickup);
 
+        float lastGeneratedY{Game::height};
+        std::mt19937 rng{std::random_device{}()};
+
 
     public:
-        
-        void Spawn(Type type, Vector2 pos);
-
         void Update(float dt, Character& character, EffectSystem& effects, float& score);
         void Draw() const;
 
 
         void Clear();
         int Count() const;
+
+        void GeneratePickups();
+
+    private:
+        float RandFloat(const float a, const float b);
+        int RandInt(const int a, const int b);
+        void Spawn(Type type, Vector2 pos);
 
 };

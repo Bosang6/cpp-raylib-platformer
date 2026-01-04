@@ -72,6 +72,10 @@ void PickupManager::Update(float dt, Character& character, EffectSystem& effects
             }),
         pickups.end()
     );
+
+    // 3. Update the last generated pickup position y
+    if(!pickups.empty())
+        lastGeneratedY = pickups.back().get()->GetPosition().y;
 }
 
 
@@ -86,7 +90,43 @@ void PickupManager::Clear() {
     pickups.clear();
 }
 
-
 int PickupManager::Count() const {
     return static_cast<int>(pickups.size());
+}
+
+float PickupManager::RandFloat(const float a, const float b){
+    std::uniform_real_distribution<float> dist(a, b);
+    return dist(rng); 
+}
+int PickupManager::RandInt(const int a, const int b){
+    std::uniform_int_distribution<int> dist(a, b);
+    return dist(rng);
+}
+
+void PickupManager::GeneratePickups(){
+    while(lastGeneratedY > 10.0f){
+        //random position
+        float newX = RandFloat(20.0f, Game::width - 50.0f);
+        float newY = RandFloat(lastGeneratedY - 100.0f, lastGeneratedY - 200.0f);
+
+        // random pickup
+        int effetType = RandInt(0, 4);
+        switch (effetType)
+        {
+        case 1:
+            Spawn(PickupManager::Type::Coin, Vector2{newX, newY});
+            break;
+        case 2:
+            Spawn(PickupManager::Type::ScoreMultiplier, Vector2{newX, newY});
+            break;
+        case 3:
+            Spawn(PickupManager::Type::Slow, Vector2{newX, newY});
+            break;
+        case 4:
+            Spawn(PickupManager::Type::Spring, Vector2{newX, newY});
+            break;        
+        }
+        //save lastGeneratedY
+        lastGeneratedY = newY;
+    }
 }

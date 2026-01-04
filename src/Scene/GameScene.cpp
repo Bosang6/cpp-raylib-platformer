@@ -2,19 +2,13 @@
 
 GameScene::GameScene() {
     GameInit();
-
-    // -----effects init-------
-    pickupManager.Spawn(PickupManager::Type::Coin, {300, 80});
-    pickupManager.Spawn(PickupManager::Type::Slow, {200, 80});
-    pickupManager.Spawn(PickupManager::Type::ScoreMultiplier, {100, 80});
-    pickupManager.Spawn(PickupManager::Type::Spring, {50, 80});
-    // ------------------------
 }
 
 void GameScene::GameInit() {
     backgroundMusic.Init();
     platformsManager.Init();
     platformsManager.GeneratePlatforms();
+    pickupManager.GeneratePickups();
     SetIsRuning(true);
     score = 0.0f;
     instructionsTimer = 5.0f;
@@ -60,6 +54,7 @@ void GameScene::Update() {
         platformsManager.CheckDelete();
         
         // effects and player update
+        pickupManager.GeneratePickups();
         effects.Update(deltaTime);
         player.Update(deltaTime, effects);
         pickupManager.Update(deltaTime, player, effects, score);
@@ -95,9 +90,9 @@ void GameScene::Update() {
         }
 
         // Disegna
+        pickupManager.Draw();
         platformsManager.DrawPlatforms();
         player.Draw();
-        pickupManager.Draw();
 
         // Controlla se il giocatore è caduto sotto lo schermo (Game Over)
         if(player.GetVelocity().y >= 1000 && playerBounds.y > Game::height){

@@ -15,7 +15,7 @@ class Pickup{
         bool collected{false};          // Stato di raccolta del pickup
 
         float animTime = 0.0f;
-
+        float moveDownVelocity{50.0f};
 
     public:
         // Costruttore base

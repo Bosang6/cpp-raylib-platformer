@@ -13,5 +13,6 @@ bool Pickup::CheckCollisionPlayer(const Rectangle& charBounds) const {
 
 void Pickup::Update(float dt){
     animTime += dt;
+    position.y += dt*moveDownVelocity;
 }
 

@@ -10,7 +10,7 @@ PlatformsManager::~PlatformsManager() {
 }
 
 void PlatformsManager::Init(){
-    platforms.clear();
+    DeletePlatforms();
     lastGeneratedY = Game::height;
 }
 
