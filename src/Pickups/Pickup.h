@@ -2,7 +2,7 @@
 #include "raylib.h"
 #include "math.h"
 
-//Forward declaration 
+
 class Character;
 class EffectSystem;
 
@@ -10,18 +10,19 @@ class EffectSystem;
 class Pickup{
 
     protected:
-        Vector2 position{};              // Posizione del pickup
-        float radius;            // Raggio del pickup
-        bool collected{false};          // Stato di raccolta del pickup
+        Vector2 position{};                 // Posizione del pickup
+        float radius;                       // Raggio del pickup
+        bool collected{false};              // Stato di raccolta del pickup
 
-        float animTime = 0.0f;
-        float moveDownVelocity{50.0f};
+        float animTime = 0.0f;              // Timer per animazioni
+        float moveDownVelocity{125.0f};      // Velocità di discesa del Pickup
 
     public:
         // Costruttore base
         Pickup(Vector2 pos, float r) : position(pos), radius(r) {}
 
-        // Distruttore virtuale
+        // Distruttore virtuale: garantisce che, distruggendo un oggetto tramite un puntatore 
+        // alla classe base, venga chiamato il distruttore corretto della classe derivata.
         virtual ~Pickup() = default;
 
 
@@ -38,20 +39,21 @@ class Pickup{
 
 
         // Utility
-        bool IsCollected() const { return collected; };
+        bool IsCollected() const { return collected; }
         Vector2 GetPosition() const { return position; }
-        float GetRadius() const { return radius; };
+        float GetRadius() const { return radius; }
 
 
         // Collisione cerchio - rettangolo
         bool CheckCollisionPlayer(const Rectangle& charBounds) const;
 
-        // 
+        // Messaggio a schermo quando il Pickup viene raccolto
         virtual const char* GetCollectMessage() const { return nullptr; }
 
 
     protected:
-
+        
+        // Effetti Grafici
         // Bonus : Pulse morbido
         float BonusPulseScale(float speed = 6.0f, float amount = 0.12f) const{
             return 1.0f + sinf(animTime * speed) * amount;

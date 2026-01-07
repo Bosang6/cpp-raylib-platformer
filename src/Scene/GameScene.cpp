@@ -55,6 +55,7 @@ void GameScene::Update() {
         
         // effects and player update
         pickupManager.GeneratePickups();
+        pickupManager.CheckDelete();
         effects.Update(deltaTime);
         player.Update(deltaTime, effects);
         ui.Update(deltaTime);

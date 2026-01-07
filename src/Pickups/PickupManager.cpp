@@ -1,3 +1,5 @@
+#include <algorithm>
+
 #include "PickupManager.h"
 #include "Pickup.h"
 #include "Coin.h"
@@ -7,13 +9,19 @@
 #include "Character/Character.h"
 #include "EffectSystem.h"
 #include "UI/UIPickMessage.h"
-#include <algorithm>
 
 
-// Trasferisce la proprietà del pickup al vettore dei pickup
+// Trasferisce la proprietà del pickup al vettore dei pickup.
+// std::unique_ptr garantisce ownership esclusiva e distruzione automatica.
 void PickupManager::Add(std::unique_ptr<Pickup> pickup) {
-    // std::move : trasferisce la proprietà del puntatore unico al vettore
+
     pickups.push_back(std::move(pickup));
+
+}
+void PickupManager::Add(std::unique_ptr<Pickup> pickup) {
+
+    pickups.push_back(std::move(pickup));
+
 }
 
 
@@ -44,20 +52,21 @@ void PickupManager::Spawn(Type type, Vector2 pos){
 }
 
 
-
+// Aggiorna tutti i Pickups, controlla la collisione con il ch e gestisce la raccolta.
+// Se raccolto : applica l'effetto (OnCollect) e mostra messaggio UI.
 void PickupManager::Update(float dt, Character& character, EffectSystem& effects, float& score, UIPickMessage& ui) {
+    
     // 1. Updtate + Collisione
     for(auto& p : pickups) {
         // p è un reference(&) a un puntatore unico (unique_ptr<Pickup>)
         // dereferenzia il puntatore ed accede al metodo Update
         p->Update(dt);
 
-        // Controllo cerchio - rettangolo tra pickup e giocatore
+        
         if (!p->IsCollected() && p->CheckCollisionPlayer(character.GetBounds()))
         {
             p->OnCollect(character, effects);
 
-            // Coin: testo dinamico + punteggio
             if (auto coin = dynamic_cast<Coin*>(p.get()))
             {
                 float added = coin->GetValue() * effects.GetScoreMultiplier();
@@ -66,7 +75,6 @@ void PickupManager::Update(float dt, Character& character, EffectSystem& effects
             }
             else
             {
-                // Tutti gli altri: messaggio polimorfico
                 if (const char* msg = p->GetCollectMessage())
                     ui.Push(msg);
             }
@@ -99,18 +107,23 @@ void PickupManager::Clear() {
     pickups.clear();
 }
 
+
 int PickupManager::Count() const {
     return static_cast<int>(pickups.size());
 }
+
 
 float PickupManager::RandFloat(const float a, const float b){
     std::uniform_real_distribution<float> dist(a, b);
     return dist(rng); 
 }
+
+
 int PickupManager::RandInt(const int a, const int b){
     std::uniform_int_distribution<int> dist(a, b);
     return dist(rng);
 }
+
 
 void PickupManager::GeneratePickups(){
     while(lastGeneratedY > 10.0f){
@@ -137,5 +150,16 @@ void PickupManager::GeneratePickups(){
         }
         //save lastGeneratedY
         lastGeneratedY = newY;
+    }
+}
+
+
+void PickupManager::CheckDelete(){
+    if(!pickups.empty()){
+        Pickup& last = *pickups.front();
+        if(last.GetPosition().y > Game::height){
+            pickups.pop_front();
+            PickupManager::CheckDelete();
+        }
     }
 }

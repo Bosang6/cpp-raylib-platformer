@@ -1,11 +1,11 @@
 #pragma once
-#include <vector>
+#include <deque>
 #include <memory>
+#include <random>
+
 #include "raylib.h"
 #include "Pickup.h"
 #include "Scene/Game.h"
-#include <random>
-
 
 class Pickup;
 class Character;
@@ -13,20 +13,21 @@ class EffectSystem;
 class UIPickMessage;
 
 
-// Classe per gestire tutti i pickup presenti nel gioco
+// Classe responsabile della gestione di tutti i Pickup nel gioco
 class PickupManager {
 
     public :
-        // Tipi di Pickup disponibili
+        // Tipi di Pickup attualmente disponibili
         enum class Type { Coin, Spring, Slow, ScoreMultiplier } ;
 
 
-        // Struttura di default
+        // Struttura contenente i valori di default
         struct Defaults
         {
             float radius = 12.f;
+
             // Coin
-            int   coinValue  = 100;
+            int coinValue  = 100;
 
             // Slow
             float slowMultiplier  = 0.6f;
@@ -40,12 +41,13 @@ class PickupManager {
             float scoreDuration = 15.f;
         };
 
-
+        
     private:
         
         Defaults defaults; 
-
-        std::vector<std::unique_ptr<Pickup>> pickups;  
+        
+        //  Permette inserimenti/rimozioni sia in testa che in coda 
+        std::deque<std::unique_ptr<Pickup>> pickups;
         void Add(std::unique_ptr<Pickup> pickup);
 
         float lastGeneratedY{Game::height};
@@ -53,16 +55,21 @@ class PickupManager {
 
 
     public:
+
         void Update(float dt, Character& character, EffectSystem& effects, float& score, UIPickMessage& ui);
+
         void Draw() const;
 
-
         void Clear();
+
         int Count() const;
 
         void GeneratePickups();
 
+        void CheckDelete();
+
     private:
+
         float RandFloat(const float a, const float b);
         int RandInt(const int a, const int b);
         void Spawn(Type type, Vector2 pos);

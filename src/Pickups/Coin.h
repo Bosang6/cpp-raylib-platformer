@@ -7,14 +7,20 @@
 class Coin : public Pickup {
     
     private:
-        float angle{0.0f};              // Angolo per l'animazione di rotazione
-        float spinSpeed{4.0f};          // Velocità di rotazione
+        // Rotazione 
+        float angle{0.0f};              
+        float spinSpeed{4.0f};          
         float minSpinScale{0.2f};
-        int value;                   // Valore della moneta
+        
+        // Valore
+        int value;                  
 
+        // Gestione dello sprite 
         static Texture2D spriteSheet;
         static bool textureLoaded;
         static int instanceCount;
+        
+        // Animazione sprite
         Rectangle currentFrame;
         int frameIndex;
         float frameTime;
@@ -22,21 +28,14 @@ class Coin : public Pickup {
 
     public:
 
-        // Costruttore della moneta
         Coin(Vector2 pos, float radius, int value);
         ~Coin();
 
-        // Metodo per aggiornare lo stato della moneta (es. animazioni)
         void Update(float dt) override;
 
-        
-        // Metodo per disegnare la moneta
         void Draw() const override;
 
-
-        // Cosa succede quando viene raccolto
         void OnCollect(Character& character, EffectSystem& effects) override;
-
         
         int GetValue() const {return value;}
 
@@ -44,7 +43,8 @@ class Coin : public Pickup {
     private:
 
         float GetSpinScaleX() const;
-
         static void LoadSpriteSheet();
         static void UnloadSpriteSheet();
+
+        
 };
