@@ -1,12 +1,11 @@
-#include "ScoreMultiplier.h"
 #include "raylib.h"
+#include "ScoreMultiplier.h"
 #include "EffectSystem.h"
 
 
-// Costruttore
+
 ScoreMultiplier::ScoreMultiplier(Vector2 pos, float radius, float scoreMultiplier, float durationSeconds)
     : Pickup(pos,radius), scoreMultiplier(scoreMultiplier), durationSeconds(durationSeconds) {}
-
 
 
 void ScoreMultiplier::Update(float dt){
@@ -14,13 +13,12 @@ void ScoreMultiplier::Update(float dt){
 }
 
 
-// Disegna lo ScoreMultiplier pickup
 void ScoreMultiplier::Draw() const {
     
     float s = BonusPulseScale();
     float r = radius * s;
     const char* text = "x2";
-    int fontSize = (int)(r * 0.9f);   // scala il testo col pickup
+    int fontSize = (int)(r * 0.9f);  
     int textWidth = MeasureText(text, fontSize);
 
     DrawCircleV(position, r, BLUE);

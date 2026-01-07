@@ -3,7 +3,7 @@
 #include "EffectSystem.h"
 
 
-// Costruttore dello slow
+
 Slow::Slow(Vector2 pos, float radius, float slowMultiplier, float durationSeconds)
     : Pickup(pos, radius), slowMultiplier(slowMultiplier), durationSeconds(durationSeconds) {}
 
@@ -13,7 +13,6 @@ void Slow::Update(float dt) {
 }
 
 
-// Disegna lo slow pickup
 void Slow::Draw() const {
     
     float dx = MalusShakeX();   
@@ -34,14 +33,11 @@ void Slow::Draw() const {
 }
 
 
-// Cosa succede quando viene raccolto
 void Slow::OnCollect(Character&, EffectSystem& effects) {
     collected = true;
 
-    // Aggiunge l'effetto di rallentamento al EffectSystem
     effects.AddEffect(EffectSystem::EffectType::Slow, durationSeconds, slowMultiplier);
 
-    // Implementazione futura : effetto sonoro e visivo
 }
 
 const char* Slow::GetCollectMessage() const { return "SLOW"; }

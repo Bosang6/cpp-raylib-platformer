@@ -24,13 +24,12 @@ void EffectSystem::AddEffect(EffectType type, float durationSeconds, float value
 
 
 void EffectSystem::Update(float dt) {
-    // Aggiorno (decremento) il timer di tutti gli effetti
+    
     for (auto& e : effects) {
         e.remainingTime -= dt;
     }
 
-
-    // Rimuovo gli effetti scaduti
+    // Rimuove tutti gli oggetti scaduti
     effects.erase(
         std::remove_if(
             effects.begin(),
@@ -43,19 +42,20 @@ void EffectSystem::Update(float dt) {
 }
 
 
-// Svuota il vettore degli effetti attivi
+
 void EffectSystem::ClearAllEffects() {
     effects.clear();
 }
 
-// Ritorna il numero di effetti attivi
+
+
 int EffectSystem::CountActiveEffects() const {
     return static_cast<int>(effects.size());
 }
 
 
 // --- Effetti 
-// Gestisco tutti gli effetti qui perchè se ogni Pickup gestisce il proprio effetto avremo problemi di stacking 
+// Gestisco tutti gli effetti qui per non avere problami di stacking 
 
 
 // Ritorna il moltiplicatore di velocità del player.
@@ -95,7 +95,7 @@ float EffectSystem::GetScoreMultiplier() const {
     
 }
 
-
+// Restituisce una copia "read-only" degli effetti attivi per la UI
 std::vector<EffectSystem::ActiveEffectInfo> EffectSystem::GetActiveEffects() const
 {
     std::vector<ActiveEffectInfo> out;

@@ -18,11 +18,6 @@ void PickupManager::Add(std::unique_ptr<Pickup> pickup) {
     pickups.push_back(std::move(pickup));
 
 }
-void PickupManager::Add(std::unique_ptr<Pickup> pickup) {
-
-    pickups.push_back(std::move(pickup));
-
-}
 
 
 // Crea e registra un pickup del tipo specificato utilizzando i parametri forniti dallo SpawnInfo.

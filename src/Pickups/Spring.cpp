@@ -3,7 +3,6 @@
 #include "Character/Character.h"
 
 
-// Costruttore dello spring
 Spring::Spring(Vector2 pos, float radius, float jumpMultiplier)
     : Pickup(pos, radius), jumpMultiplier(jumpMultiplier) {}
 
@@ -38,6 +37,7 @@ static void DrawSpringIcon(Vector2 center, float radius, Color col)
     DrawLineEx(prev, { center.x, bottom }, 2.0f, col);
 }
 
+
 void Spring::Draw() const {
 
     float s = BonusPulseScale();
@@ -57,12 +57,12 @@ void Spring::OnCollect(Character& character, EffectSystem& ) {
     collected = true;
     
     character.SetNextJumpMultiplier(jumpMultiplier);
-
-    // Implementazione futura : effetto sonoro e visivo
-
 }
 
-const char* Spring::GetCollectMessage() const { return "JUMP BOOST"; }
+
+const char* Spring::GetCollectMessage() const { 
+    return "JUMP BOOST"; 
+}
 
 
 

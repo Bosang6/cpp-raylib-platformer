@@ -2,10 +2,12 @@
 #include "raylib.h"
 #include "cmath"
 
+
 // Variabili statiche
 Texture2D Coin::spriteSheet = {0};
 bool Coin::textureLoaded = false;
 int Coin::instanceCount = 0;
+
 
 Coin::Coin(Vector2 pos, float radius, int value)
     : Pickup(pos, radius), value(value), frameIndex(0), frameTime(0.0f) {
@@ -19,6 +21,7 @@ Coin::Coin(Vector2 pos, float radius, int value)
         currentFrame = {0, 0, 16, 16};
 }
 
+
 Coin::~Coin() {
     instanceCount--;
     
@@ -28,6 +31,7 @@ Coin::~Coin() {
     }
 }
 
+
 void Coin::LoadSpriteSheet() {
     spriteSheet = ::LoadTexture("assets/coin.png");
     if(spriteSheet.id > 0) {
@@ -35,12 +39,14 @@ void Coin::LoadSpriteSheet() {
     }
 }
 
+
 void Coin::UnloadSpriteSheet() {
     if(textureLoaded) {
         ::UnloadTexture(spriteSheet);
         textureLoaded = false;
     }
 }
+
 
 void Coin::Update(float dt) {
     
@@ -65,12 +71,14 @@ void Coin::Update(float dt) {
 
 }    
 
-// Schiaccia la moneta
+
+// "Schiaccia" la moneta
 float Coin::GetSpinScaleX() const
 {
     float spin = fabsf(cosf(angle));
     return minSpinScale + spin * (1.0f - minSpinScale);
 }
+
 
 void Coin::Draw() const {
      if(textureLoaded) {
@@ -103,7 +111,7 @@ void Coin::Draw() const {
     DrawEllipseLines(position.x, position.y, radius * scaleX, radius, ORANGE);
 
     // debug
-    DrawCircleLines((int)position.x,(int)position.y, radius, RED);
+    // DrawCircleLines((int)position.x,(int)position.y, radius, RED);
 
     }    
 }

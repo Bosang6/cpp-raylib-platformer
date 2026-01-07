@@ -2,7 +2,6 @@
 #include "Pickup.h"
 
 
-// ForwardDeclaration
 class Character;
 class EffectSystem;
 
@@ -15,7 +14,6 @@ class ScoreMultiplier : public Pickup{
 
     public:
 
-        //Costruttore
         ScoreMultiplier(Vector2 pos, float radius, float scoreMultiplier, float durationSeconds);
 
         void Update(float dt) override;
