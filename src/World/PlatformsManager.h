@@ -29,9 +29,16 @@ private:
     float RandFloat(const float a, const float b);
     void GenerateOne();
 private:
+    // front : the highest platform
+    //  back : the bottommost platform
     std::deque<std::unique_ptr<Platform>> platforms;
 
     //----- data for generate platforms ------
+
+    /* 
+    Save the y-coordinate of the topmost platform. 
+    When this value is greater than 10.0f, create a new platform.
+    */
     float lastGeneratedY{static_cast<float>(Game::height)};
 
     // delete distance
@@ -44,7 +51,7 @@ private:
     float moveSpeed{150.0f}; 
     float gravity{980.0f};
     /*
-        H = v0^2 / 2g * 2(jump twice)
+        H = v0^2 / 2g
     */
     float playerMaxJumpVertical{maxVerticleVelocity * maxVerticleVelocity / (2 * gravity) * 0.9f};
     /*

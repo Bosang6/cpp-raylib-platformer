@@ -1,12 +1,6 @@
 #include "Platform.h"
 
 class BreakablePlatform : public Platform{
-private:
-    bool broken{false};
-    bool triggered{false};
-    float breakDelay{50.0f};
-    float breakTimer{50.0f};
-
 public:
     BreakablePlatform(const Vector2& pos) 
         : Platform(pos, E_PlatformType::Breakable) {}
@@ -16,4 +10,10 @@ public:
 
     void TriggerBreak();
     bool IsBroken() const;
+
+private:
+    bool broken{false};
+    bool triggered{false};
+    float breakDelay{50.0f}; // Used to calculate alpha
+    float breakTimer{50.0f};
 };

@@ -15,10 +15,6 @@ Platform::Platform(const Vector2& pos, E_PlatformType t)
     }
 }
 
-Platform::~Platform() {
-    // Le texture vengono scaricate dal PlatformsManager
-}
-
 void Platform::LoadTextures() {
     textureNormal = ::LoadTexture("assets/platform_normal.png");
     textureBreakable = ::LoadTexture("assets/platform_breakable.png");
@@ -26,6 +22,7 @@ void Platform::LoadTextures() {
     texturesLoaded = true;
 }
 
+// Le texture vengono scaricate dal PlatformsManager
 void Platform::UnloadTextures() {
     if(texturesLoaded) {
         ::UnloadTexture(textureNormal);
@@ -55,7 +52,7 @@ void Platform::Draw() const {
 
 void Platform::UpdatePosition(float dt){
     position.y += dt * moveDownVelocity;
-    bounds.y += dt * moveDownVelocity;
+    bounds.y = position.y;
 }
 
 const Rectangle& Platform::GetBounds() const {

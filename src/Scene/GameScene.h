@@ -15,15 +15,23 @@ class GameScene : public ISceneUpdate
 public:
     GameScene();
     void Update() override;
-    PlayableCharacter player{{200, 100}, {64, 96}};
     bool GetIsRunning() const;
     void SetIsRuning(bool isRunning);
     float GetScore() const;
     
 private:
     void GameInit();
+    void Updates();
+    void HandleCollisions();
+    void DrawGameObjects();
+    void DrawUI();
+    void CheckGameOver();
+    void UpdateScore(float deltaTime);
+    void DrawScore();
 
 private:
+    BackgroundMusic backgroundMusic{"assets/audio/background.mp3"};
+    PlayableCharacter player{{200, 100}, {64, 96}}; 
     bool isRunning{false};
     PlatformsManager& platformsManager = PlatformsManager::GetInstance();
     PickupManager pickupManager;
@@ -31,16 +39,11 @@ private:
     UIPickMessage ui;
     UIStatusEffects effectsUI;
     float instructionsTimer{5.0f};
+    float deltaTime{GetFrameTime()};
     
     // Sistema di punteggio
     float score{0.0f};
     float scoreIncrement{10.0f};
-
-    // Dichiarazione delle funzioni
-    void UpdateScore(float deltaTime);
-    void DrawScore();
-
-    BackgroundMusic backgroundMusic{"assets/audio/background.mp3"};
 };
 
 

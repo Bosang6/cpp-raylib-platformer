@@ -13,6 +13,7 @@ Game::Game(){
 
 Game::~Game(){
     delete currentScene;
+    currentScene = NULL;
 }
 
 void Game::Start(){

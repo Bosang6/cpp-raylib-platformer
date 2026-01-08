@@ -9,5 +9,5 @@ public:
     void UpdatePosition(float dt) override;
 
 private:
-    float theta{0.0f};
+    float theta{0.0f};  // Used to calculate displacement
 };
