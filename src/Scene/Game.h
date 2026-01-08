@@ -9,8 +9,13 @@ enum class E_SceneType{
 };
 
 class Game{
-private:
-    E_SceneType currentSceneType{E_SceneType::Begin};
+public:
+    Game();
+    ~Game();
+    void Start();
+    void ChangeScene(const E_SceneType type, float scoreData = 0.0f);
+    void SetSceneTyoe(E_SceneType sceneType);
+
 public:
     // window size
     const static int width{600};
@@ -18,9 +23,6 @@ public:
     // current scene pointer
     ISceneUpdate *currentScene;
 
-    Game();
-    ~Game();
-    void Start();
-    void ChangeScene(const E_SceneType type, float scoreData = 0.0f);
-    void SetSceneTyoe(E_SceneType sceneType);
+private:
+    E_SceneType currentSceneType{E_SceneType::Begin};
 };
