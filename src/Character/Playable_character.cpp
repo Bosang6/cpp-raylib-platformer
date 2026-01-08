@@ -91,7 +91,7 @@ void PlayableCharacter::Draw() {
         float spriteHeight = 32.0f * spriteScale;
         // Disegna lo sprite
         Rectangle source = currentFrame;
-        //source.y -= 4;
+        source.y -= 4;
         Rectangle dest = {
             position.x + (size.x - spriteWidth) / 2,
             position.y + size.y - spriteHeight /*- bounceOffset*/,
