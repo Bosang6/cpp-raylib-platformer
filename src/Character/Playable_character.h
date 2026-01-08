@@ -11,7 +11,7 @@ private:
 
     // Animazioni e aspetto
     float animationTimer;
-    float bounceOffset;
+    //float bounceOffset;
     bool facingRight;
 
     // Sprite sheet

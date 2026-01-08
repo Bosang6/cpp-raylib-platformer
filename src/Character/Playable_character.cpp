@@ -86,15 +86,20 @@ void PlayableCharacter::Update(float deltaTime, const EffectSystem& effects) {
 
 void PlayableCharacter::Draw() {
     if(hasTexture) {
+        float spriteScale = std::min(size.x / 32.0f, size.y / 32.0f);
+        float spriteWidth = 32.0f * spriteScale;
+        float spriteHeight = 32.0f * spriteScale;
         // Disegna lo sprite
         Rectangle source = currentFrame;
+        //source.y -= 4;
         Rectangle dest = {
-            position.x,
-            position.y /*- bounceOffset*/,
-            size.x,
-            size.y
+            position.x + (size.x - spriteWidth) / 2,
+            position.y + size.y - spriteHeight /*- bounceOffset*/,
+            spriteWidth,
+            spriteHeight
         };
-        
+        //DrawRectangleLinesEx({position.x, position.y, size.x, size.y}, 2, RED);
+
         // Flip orizzontale se guarda a sinistra
         if(!facingRight) {
             source.width = -source.width;
