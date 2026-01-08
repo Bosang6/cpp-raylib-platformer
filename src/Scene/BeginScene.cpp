@@ -1,6 +1,6 @@
 #include "BeginScene.h"
-#include "Game.h"
 #include "raylib.h"
+#include "Game.h"
 
 void BeginScene::Update(){
     BeginDrawing();

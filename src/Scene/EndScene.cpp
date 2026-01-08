@@ -1,4 +1,5 @@
 #include "EndScene.h"
+#include "raylib.h"
 #include "Game.h"
 
 EndScene::EndScene() : score(0.0f) {
