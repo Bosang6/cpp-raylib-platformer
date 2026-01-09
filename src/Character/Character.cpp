@@ -30,7 +30,7 @@ nextJumpMultiplier = jumpMultiplier;
 }
 
 void Character::Draw() {
-    // Disegno base - può essere overridden
+    // Disegno di base del personaggio
     DrawRectangleV(position, size, BLUE);
 }
 
@@ -58,11 +58,8 @@ Rectangle Character::GetBounds() const {
 }
 
 void Character::OnLandOnPlatform() {
-    // Stub - verrà implementato quando integrato con world building
     isOnGround = true;
     velocity.y = 0.0f;
 }
 
-void Character::OnCollectPowerUp(int powerUpType) {
-    // Stub - verrà implementato quando integrato con power-up system
-}
+void Character::OnCollectPowerUp(int powerUpType) {}

@@ -13,7 +13,7 @@ protected:
     float animTime = 0.0f;
     float moveDownVelocity{125.0f};
     
-    // --- Sprite Sheet condiviso ---
+    // Sprite Sheet condiviso per tutti i pickup
     static Texture2D spriteSheet;
     static bool textureLoaded;
     static int instanceCount;
@@ -21,10 +21,10 @@ protected:
     Rectangle currentFrame;
     int frameIndex;
     float frameTime;
-    Color tint; // Colore del pickup (giallo/rosso/verde/blu)
+    Color tint; 
 
 public:
-    Pickup(Vector2 pos, float r, Color tintColor);  // <-- AGGIUNTO Color
+    Pickup(Vector2 pos, float r, Color tintColor);  
     virtual ~Pickup();
     
     virtual void Update(float dt);

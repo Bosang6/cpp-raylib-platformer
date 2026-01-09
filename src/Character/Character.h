@@ -30,7 +30,7 @@ public:
     void MoveRight(float deltaTime);
     void ApplyGravity(float deltaTime);
     
-    // Interfaccia con il mondo esterno (break per ora)
+    // Interfaccia con il mondo esterno
     virtual void OnLandOnPlatform();
     virtual void OnCollectPowerUp(int powerUpType);
     virtual void SetNextJumpMultiplier(float jumpMultiplier);
