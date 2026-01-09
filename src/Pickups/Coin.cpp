@@ -46,7 +46,7 @@ void Coin::Draw() const {
             dest,
             origin,
             0.0f,
-            tint  // Usa il colore YELLOW
+            tint
         );
     } else {
         // Fallback se texture non caricata

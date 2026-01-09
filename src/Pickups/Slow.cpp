@@ -31,7 +31,7 @@ void Slow::Draw() const {
             dest,
             origin,
             0.0f,
-            tint  // Usa il colore RED
+            tint
         );
         
         // Triangolo di warning sopra lo sprite

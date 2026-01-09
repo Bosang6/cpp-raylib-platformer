@@ -29,7 +29,7 @@ void ScoreMultiplier::Draw() const {
             dest,
             origin,
             0.0f,
-            tint  // Usa il colore BLUE
+            tint 
         );
         
         // Testo "x2" sopra lo sprite

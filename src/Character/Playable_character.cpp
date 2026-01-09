@@ -7,7 +7,6 @@ PlayableCharacter::PlayableCharacter(Vector2 startPos, Vector2 charSize)
     , maxJumps(2)
     , jumpForce(-500.0f)
     , animationTimer(0.0f)
-    //, bounceOffset(0.0f)
     , facingRight(true)
     , frameIndex(0)
     , frameTime(0.0f)
@@ -39,7 +38,7 @@ void PlayableCharacter::Update(float deltaTime, const EffectSystem& effects) {
     // Aggiorna timer per animazioni
     animationTimer += deltaTime;
     
-    // ========== ANIMAZIONE SPRITE ==========
+    // Animazione dello sprite
     if(hasTexture) {
         frameTime += deltaTime;
         
@@ -65,16 +64,7 @@ void PlayableCharacter::Update(float deltaTime, const EffectSystem& effects) {
             }
         }
     }
-        
-    // Effetto "bounce" quando è a terra
-    /* if (isOnGround) {
-        bounceOffset = sin(animationTimer * 8.0f) * 2.0f;
-    } else {
-        bounceOffset = 0.0f;
-    }
-    */
-    //bounceOffset = 0.0f;
-    
+
     // Wrap-around orizzontale
     if (position.x + size.x < 0) {
         position.x = GetScreenWidth();
@@ -94,10 +84,11 @@ void PlayableCharacter::Draw() {
         source.y -= 4;
         Rectangle dest = {
             position.x + (size.x - spriteWidth) / 2,
-            position.y + size.y - spriteHeight /*- bounceOffset*/,
+            position.y + size.y - spriteHeight,
             spriteWidth,
             spriteHeight
         };
+        //Metodo usato per testare i bounds del personaggio con texture
         //DrawRectangleLinesEx({position.x, position.y, size.x, size.y}, 2, RED);
 
         // Flip orizzontale se guarda a sinistra
@@ -128,22 +119,22 @@ void PlayableCharacter::Draw() {
             );
         }
         
-        // === CORPO PRINCIPALE ===
+        // Main body
         // Corpo sferico con effetto bounce
         float bodyRadius = size.x / 2;
         Color bodyColor = SKYBLUE;
         
         DrawCircleV(
-            Vector2{centerX, centerY /*- bounceOffset*/}, 
+            Vector2{centerX, centerY}, 
             bodyRadius, 
             bodyColor
         );
         
         // Bordo del corpo (per dare profondità)
-        DrawCircleLines(centerX, centerY /*- bounceOffset*/, bodyRadius, BLUE);
+        DrawCircleLines(centerX, centerY, bodyRadius, BLUE);
         
-        // === TESTA ===
-        float headY = position.y + 10 /*- bounceOffset*/;
+        // Head
+        float headY = position.y + 10;
         float headRadius = 8;
         
         DrawCircleV(
@@ -152,26 +143,22 @@ void PlayableCharacter::Draw() {
             BLUE
         );
         
-        // === OCCHI ===
+        // Eyes
         float eyeOffsetX = 4;
         float eyeY = headY - 1;
         
-        // Occhi bianchi
         DrawCircleV(Vector2{centerX - eyeOffsetX, eyeY}, 3.5f, WHITE);
         DrawCircleV(Vector2{centerX + eyeOffsetX, eyeY}, 3.5f, WHITE);
         
-        // Pupille (si muovono leggermente in base alla direzione)
         float pupilOffsetX = facingRight ? 1.0f : -1.0f;
         DrawCircleV(Vector2{centerX - eyeOffsetX + pupilOffsetX, eyeY}, 1.5f, BLACK);
         DrawCircleV(Vector2{centerX + eyeOffsetX + pupilOffsetX, eyeY}, 1.5f, BLACK);
         
-        // Riflesso negli occhi (per renderli più vivi)
         DrawCircleV(Vector2{centerX - eyeOffsetX + 1, eyeY - 1}, 0.8f, WHITE);
         DrawCircleV(Vector2{centerX + eyeOffsetX + 1, eyeY - 1}, 0.8f, WHITE);
         
-        // === BOCCA ===
+        // Mouth
         if (isOnGround) {
-            // Sorriso quando è a terra
             DrawCircleSector(
                 Vector2{centerX, headY + 3},
                 3, 
@@ -188,28 +175,28 @@ void PlayableCharacter::Draw() {
             DrawEllipse(centerX, headY + 4, 2, 3, DARKBLUE);
         }
         
-        // === PIEDINI ===
+        // Feets
         Color footColor = BLUE;
         float footY = position.y + size.y - 2;
         
         if (!isOnGround && velocity.y < 0) {
-            // Piedini raccolti quando salta verso l'alto
+            // Raccolti quando salta verso l'alto
             DrawCircleV(Vector2{centerX - 8, footY - 3}, 3, footColor);
             DrawCircleV(Vector2{centerX + 8, footY - 3}, 3, footColor);
         } else if (!isOnGround && velocity.y > 0) {
-            // Piedini estesi quando cade
+            // Estesi quando cade
             DrawCircleV(Vector2{centerX - 6, footY + 4}, 3, footColor);
             DrawCircleV(Vector2{centerX + 6, footY + 4}, 3, footColor);
         } else {
-            // Piedini normali quando è a terra
+            // Normali quando è a terra
             float footBounce = sin(animationTimer * 10.0f) * 1.5f;
             DrawCircleV(Vector2{centerX - 7, footY + footBounce}, 3, footColor);
             DrawCircleV(Vector2{centerX + 7, footY - footBounce}, 3, footColor);
         }
         
-        // === DEBUG INFO (opzionale) ===
+        // Info di debug
         DrawText(TextFormat("Jumps: %d", jumpsRemaining), 10, 10, 20, WHITE);
-        DrawText(TextFormat("Vel Y: %.0f", velocity.y), 10, 35, 20, WHITE);
+        //DrawText(TextFormat("Vel Y: %.0f", velocity.y), 10, 35, 20, WHITE);
     }
 }
 

@@ -53,7 +53,7 @@ void Spring::Draw() const {
             dest,
             origin,
             0.0f,
-            tint  // Usa il colore GREEN
+            tint 
         );
         
         // Icona molla sopra lo sprite
