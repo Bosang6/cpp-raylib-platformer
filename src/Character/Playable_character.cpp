@@ -100,7 +100,6 @@ void PlayableCharacter::Draw() {
         
         // Debug
         DrawText(TextFormat("Jumps: %d", jumpsRemaining), 10, 10, 20, WHITE);
-        DrawText(TextFormat("Vel Y: %.0f", velocity.y), 10, 35, 20, WHITE);
         
     } else {
         // Fallback - Calcola posizione centrale per il disegno
@@ -196,7 +195,6 @@ void PlayableCharacter::Draw() {
         
         // Info di debug
         DrawText(TextFormat("Jumps: %d", jumpsRemaining), 10, 10, 20, WHITE);
-        //DrawText(TextFormat("Vel Y: %.0f", velocity.y), 10, 35, 20, WHITE);
     }
 }
 
