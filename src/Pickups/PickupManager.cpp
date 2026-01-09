@@ -124,7 +124,7 @@ void PickupManager::GeneratePickups(){
     while(lastGeneratedY > 10.0f){
         //random position
         float newX = RandFloat(20.0f, Game::width - 50.0f);
-        float newY = RandFloat(lastGeneratedY - 200.0f, lastGeneratedY - 100.0f);
+        float newY = RandFloat(lastGeneratedY - 400.0f, lastGeneratedY - 200.0f);
 
         // random pickup
         int effetType = RandInt(0, 4);
