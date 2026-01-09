@@ -18,6 +18,7 @@ public:
     void DrawPlatforms();
     void UpdatePlatformsPosition(float dt);
     void CheckDelete();
+    Vector2 GetFirstPlatformPosition();
 
     // api
     const std::deque<std::unique_ptr<Platform>>& GetPlatforms() const;

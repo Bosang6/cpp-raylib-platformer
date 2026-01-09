@@ -1,5 +1,4 @@
 #include "PlatformsManager.h"
-
 PlatformsManager& PlatformsManager::GetInstance() {
     static PlatformsManager instance;
     return instance;
@@ -57,14 +56,18 @@ void PlatformsManager::GenerateOne(){
     // generate a platform
     float generateProbablity = RandFloat(0.0f, 10.0f);
     E_PlatformType t = E_PlatformType::Solid;
-    if(platforms.size() > 0)
+    if(platforms.size() > 0){
         t = platforms.front().get()->GetType();
-    // Generate a BreakablePlatform with 30% probability and the last platform generated was not breakable.
-    if(generateProbablity > 7.0f && generateProbablity < 10.0f && t != E_PlatformType::Breakable){
-        platforms.push_front(std::make_unique<BreakablePlatform>(Vector2{newX, newY}));
-    }
-    else if(generateProbablity > 4.0f && generateProbablity <= 7.0f){
-        platforms.push_front(std::make_unique<MovingPlatform>(Vector2{newX, newY}, RandFloat(0.0f, 1.0f)));
+        // Generate a BreakablePlatform with 30% probability and the last platform generated was not breakable.
+        if(generateProbablity > 7.0f && generateProbablity < 10.0f && t != E_PlatformType::Breakable){
+            platforms.push_front(std::make_unique<BreakablePlatform>(Vector2{newX, newY}));
+        }
+        else if(generateProbablity > 4.0f && generateProbablity <= 7.0f){
+            platforms.push_front(std::make_unique<MovingPlatform>(Vector2{newX, newY}, RandFloat(0.0f, 1.0f)));
+        }
+        else{
+            platforms.push_front(std::make_unique<Platform>(Vector2{newX, newY}));
+        }
     }
     else{
         platforms.push_front(std::make_unique<Platform>(Vector2{newX, newY}));
@@ -96,4 +99,8 @@ void PlatformsManager::UpdatePlatformsPosition(float dt) {
 // using for collision detection
 const std::deque<std::unique_ptr<Platform>>& PlatformsManager::GetPlatforms() const{
     return platforms;
+}
+
+Vector2 PlatformsManager::GetFirstPlatformPosition(){
+    return platforms.back().get()->GetSurfaceCenter();
 }

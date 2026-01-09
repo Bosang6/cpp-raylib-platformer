@@ -3,6 +3,7 @@
 Texture2D Pickup::spriteSheet = {0};
 bool Pickup::textureLoaded = false;
 int Pickup::instanceCount = 0;
+float Pickup::moveDownVelocity = 0.0f;
 
 Pickup::Pickup(Vector2 pos, float r, Color tintColor)
     : position(pos), radius(r), tint(tintColor), frameIndex(0), frameTime(0.0f) {

@@ -1,5 +1,8 @@
 #include <cmath>
 #include "Playable_character.h"
+#include "World/Platform.h"
+#include "Pickups/Pickup.h"
+#include "Scene/GameScene.h"
 
 PlayableCharacter::PlayableCharacter(Vector2 startPos, Vector2 charSize)
     : Character(startPos, charSize)
@@ -215,6 +218,12 @@ void PlayableCharacter::HandleInput(float deltaTime, const EffectSystem& effects
     // Salto
     if (IsKeyPressed(KEY_SPACE)) {
         Jump();
+        if(isFirstJump){
+            Platform::moveDownVelocity = 125.0f;
+            Pickup::moveDownVelocity = 125.0f;
+            GameScene::gameStart = true;
+            isFirstJump = false;
+        }
     }
 }
 

@@ -29,15 +29,18 @@ private:
     void UpdateScore(float deltaTime);
     void DrawScore();
 
+public:
+    static bool gameStart;
+
 private:
     BackgroundMusic backgroundMusic{"assets/audio/background.mp3"};
-    PlayableCharacter player{{200, 100}, {64, 96}}; 
     bool isRunning{false};
     PlatformsManager& platformsManager = PlatformsManager::GetInstance();
     PickupManager pickupManager;
     EffectSystem effects;
     UIPickMessage ui;
     UIStatusEffects effectsUI;
+    PlayableCharacter player{{200, 100}, {64, 96}}; 
     float instructionsTimer{5.0f};
     float deltaTime{GetFrameTime()};
     

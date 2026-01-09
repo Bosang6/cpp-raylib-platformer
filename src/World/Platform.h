@@ -21,6 +21,8 @@ public:
     static void LoadTextures();
     static void UnloadTextures();
 
+    static float moveDownVelocity;
+
 protected:
     Rectangle bounds{};
     E_PlatformType type{};
@@ -28,8 +30,6 @@ protected:
     // Platform size
     static constexpr float width{80.0f};
     static constexpr float height{20.0f};
-
-    static constexpr float moveDownVelocity{125.0f};
     
     // Texture statiche
     static Texture2D textureNormal;

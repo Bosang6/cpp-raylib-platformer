@@ -1,10 +1,12 @@
 #include "Platform.h"
+#include <iostream>
 
 // Variabili statiche
 Texture2D Platform::textureNormal = {0};
 Texture2D Platform::textureBreakable = {0};
 Texture2D Platform::textureMoving = {0};
 bool Platform::texturesLoaded = false;
+float Platform::moveDownVelocity = 0.0f;
 
 Platform::Platform(const Vector2& pos, E_PlatformType t)
     : GameObject(pos), bounds{pos.x, pos.y, width, height}, type{t}
@@ -51,7 +53,7 @@ void Platform::Draw() const {
 }
 
 void Platform::UpdatePosition(float dt){
-    position.y += dt * moveDownVelocity;
+    position.y += dt * Platform::moveDownVelocity;
     bounds.y = position.y;
 }
 

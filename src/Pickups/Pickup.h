@@ -11,7 +11,6 @@ protected:
     float radius;
     bool collected{false};
     float animTime = 0.0f;
-    float moveDownVelocity{125.0f};
     
     // Sprite Sheet condiviso per tutti i pickup
     static Texture2D spriteSheet;
@@ -36,6 +35,7 @@ public:
     float GetRadius() const { return radius; }
     bool CheckCollisionPlayer(const Rectangle& charBounds) const;
     virtual const char* GetCollectMessage() const { return nullptr; }
+    static float moveDownVelocity;
 
 protected:
     float BonusPulseScale(float speed = 6.0f, float amount = 0.12f) const;

@@ -1,10 +1,12 @@
 #include "GameScene.h"
+bool GameScene::gameStart = false;
 
 GameScene::GameScene() {
     GameInit();
 }
 
 void GameScene::GameInit() {
+    gameStart = false;
     backgroundMusic.Init();
     platformsManager.Init();
     platformsManager.GeneratePlatforms();
@@ -12,6 +14,11 @@ void GameScene::GameInit() {
     SetIsRuning(true);
     score = 0.0f;
     instructionsTimer = 5.0f;
+    Vector2 pos = platformsManager.GetFirstPlatformPosition();
+    pos.y -= player.GetBounds().y;
+    player.SetPosition(pos);
+    Platform::moveDownVelocity = 0.0f;
+    Pickup::moveDownVelocity = 0.0f;
 }
 
 float GameScene::GetScore() const {
@@ -67,7 +74,7 @@ void GameScene::Updates(){
     }
 
     // Aggiorna punteggio (solo se il gioco è in corso)
-    if(isRunning) {
+    if(isRunning && gameStart) {
         UpdateScore(deltaTime);
     }
 

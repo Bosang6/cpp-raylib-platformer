@@ -30,7 +30,7 @@ void BreakablePlatform::UpdatePosition(float dt){
 
     // timer
     if(triggered && !broken){
-        breakTimer -= dt * moveDownVelocity;
+        breakTimer -= dt * Platform::moveDownVelocity;
         if(breakTimer < 0.0){
             broken = true;
         }

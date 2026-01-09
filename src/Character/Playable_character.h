@@ -20,6 +20,7 @@ private:
     int frameIndex;
     float frameTime;
     bool hasTexture;
+    bool isFirstJump{true};
     
 public:
     PlayableCharacter(Vector2 startPos, Vector2 charSize);
