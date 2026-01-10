@@ -18,7 +18,6 @@ class UIPickMessage
 
         std::deque<Message> messages;
         int topY = 18;
-        int maxQueue = 3;
 
 
     public:
@@ -34,10 +33,6 @@ class UIPickMessage
             m.timeLeft = durationSeconds;
 
             messages.push_back(m);
-
-            // opzionale: limita la coda
-            while ((int)messages.size() > maxQueue)
-                messages.pop_front();
         }
 
 
