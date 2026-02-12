@@ -14,16 +14,18 @@ class UIPickMessage
             std::string text;
             float duration = 1.2f;
             float timeLeft = 1.2f;
+
+            bool useCustomPos = false;
+            Vector2 pos = {0,0};
         };
 
-        std::deque<Message> messages;
+        std::vector<Message> messages;
         int topY = 18;
 
 
     public:
 
-        // Inserisce un messaggio in coda 
-        void Push(const char* text, float durationSeconds = 1.2f)
+        void PushAt(const char* text, Vector2 screenPos, float durationSeconds = 1.2f)
         {
             if (!text || text[0] == '\0') return;
 
@@ -31,8 +33,11 @@ class UIPickMessage
             m.text = text;
             m.duration = durationSeconds;
             m.timeLeft = durationSeconds;
+            m.useCustomPos = true;
+            m.pos = screenPos;
 
-            messages.push_back(m);
+            messages.push_back(std::move(m));
+            
         }
 
 
@@ -40,11 +45,14 @@ class UIPickMessage
         {
             if (messages.empty()) return;
 
-            Message& m = messages.front();
-            m.timeLeft -= dt;
+            for (auto& m : messages)
+                m.timeLeft -= dt;
 
-            if (m.timeLeft <= 0.0f)
-                messages.pop_front();
+            messages.erase(
+                std::remove_if(messages.begin(), messages.end(),
+                    [](const Message& m) { return m.timeLeft <= 0.0f; }),
+                messages.end()
+            );
         }
 
 
@@ -52,24 +60,39 @@ class UIPickMessage
         {
             if (messages.empty()) return;
 
-            const Message& m = messages.front();
+            const int baseFontSize = 32;
 
-            float t = (m.duration > 0.0f) ? (m.timeLeft / m.duration) : 0.0f;
-            float alpha = (t < 0.3f) ? (t / 0.3f) : 1.0f; 
+            for (const Message& m : messages)
+            {
+                float t = (m.duration > 0.0f) ? (m.timeLeft / m.duration) : 0.0f;
+                
+                float alpha = t;
 
-            int fontSize = 32;
-            int textWidth = MeasureText(m.text.c_str(), fontSize);
+                float scale = 0.6f + 0.4f * t;
+                int fontSize = (int)(baseFontSize * scale);
 
-            int x = GetScreenWidth() / 2 - textWidth / 2;
-            int y = topY;
+                int textWidth = MeasureText(m.text.c_str(), fontSize);
 
-            
-            DrawText(m.text.c_str(), x, y, fontSize, WHITE);
+                int x, y;
+
+                if (m.useCustomPos)
+                {
+                    x = (int)(m.pos.x - textWidth * 0.5f);
+                    y = (int)(m.pos.y);
+                }
+                else
+                {
+                    // se usi la modalità vecchia "in alto", impilali verticalmente
+                    x = GetScreenWidth() / 2 - textWidth / 2;
+                    y = topY;
+                }
+
+                // Effetto salita
+                float rise = (1.0f - t) * 25.0f;
+
+                DrawText(m.text.c_str(), x, (int)(y - rise), fontSize, Fade(WHITE, alpha));
+            }
         }
 
-        // Setta la posizione verticale del testo 
-        void SetTopY(int y) { topY = y; }
-
-
-
+    void SetTopY(int y) { topY = y; }
 };

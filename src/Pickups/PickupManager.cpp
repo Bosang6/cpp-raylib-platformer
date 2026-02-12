@@ -60,18 +60,21 @@ void PickupManager::Update(float dt, Character& character, EffectSystem& effects
         
         if (!p->IsCollected() && p->CheckCollisionPlayer(character.GetBounds()))
         {
+            Vector2 msgPos = p->GetPosition();
+            msgPos.y -= 30.f;
+
             p->OnCollect(character, effects);
 
             if (auto coin = dynamic_cast<Coin*>(p.get()))
             {
                 float added = coin->GetValue() * effects.GetScoreMultiplier();
                 score += added;
-                ui.Push(TextFormat("Score +%.0f", added));
+                ui.PushAt(TextFormat("Score +%.0f", added), msgPos);
             }
             else
             {
                 if (const char* msg = p->GetCollectMessage())
-                    ui.Push(msg);
+                    ui.PushAt(msg, msgPos);
             }
         }
     }
