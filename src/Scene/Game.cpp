@@ -17,6 +17,7 @@ Game::~Game(){
 }
 
 void Game::Start(){
+    InitAudioDevice();
     //game loop
     while(!WindowShouldClose()){
         // change scene 
@@ -35,6 +36,7 @@ void Game::Start(){
         }
         currentScene->Update();
     }
+    CloseAudioDevice();
 }
 
 void Game::ChangeScene(const E_SceneType type, float scoreData){
