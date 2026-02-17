@@ -3,7 +3,7 @@
 BackgroundMusic::BackgroundMusic(const char* path) : path{path} { }
 
 void BackgroundMusic::Init(){
-    InitAudioDevice();
+    //InitAudioDevice();
     music = LoadMusicStream(path);
     PlayMusicStream(music);
 }
@@ -14,6 +14,6 @@ void BackgroundMusic::Play(){
 
 void BackgroundMusic::Close(){
     UnloadMusicStream(music);
-    CloseAudioDevice();
+    //CloseAudioDevice();
 }
 

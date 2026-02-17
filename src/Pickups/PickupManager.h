@@ -2,6 +2,8 @@
 #include <deque>
 #include <memory>
 #include <random>
+#include <unordered_map>
+#include <string>
 
 #include "raylib.h"
 #include "Pickup.h"
@@ -53,6 +55,9 @@ class PickupManager {
         float lastGeneratedY{Game::height};
         std::mt19937 rng{std::random_device{}()};
 
+        bool soundsLoaded = false;
+        std::unordered_map<std::string, Sound> sound;
+
 
     public:
 
@@ -67,6 +72,10 @@ class PickupManager {
         void GeneratePickups();
 
         void CheckDelete();
+
+        void InitSounds();
+
+        void UnloadSounds();
 
     private:
 

@@ -64,3 +64,7 @@ void Slow::OnCollect(Character&, EffectSystem& effects) {
 const char* Slow::GetCollectMessage() const { 
     return "SLOW"; 
 }
+
+const char* Slow::GetCollectSound() const {
+    return "slow";
+}

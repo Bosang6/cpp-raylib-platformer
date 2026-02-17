@@ -60,3 +60,7 @@ void ScoreMultiplier::OnCollect(Character&, EffectSystem& effects){
 const char* ScoreMultiplier::GetCollectMessage() const {
     return "Score x2";
 }
+
+const char* ScoreMultiplier::GetCollectSound() const {
+    return "scorex2";
+}

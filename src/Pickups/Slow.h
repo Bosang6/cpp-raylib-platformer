@@ -20,5 +20,6 @@ class Slow : public Pickup {
         void Draw() const override;
         void OnCollect(Character& character, EffectSystem& effects) override;
         const char* GetCollectMessage() const override;
+        const char* GetCollectSound() const override;
 
 };

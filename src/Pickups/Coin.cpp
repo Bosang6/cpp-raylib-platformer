@@ -59,3 +59,7 @@ void Coin::Draw() const {
 void Coin::OnCollect(Character& character, EffectSystem& effects) {
     collected = true;
 }
+
+const char* Coin::GetCollectSound() const {
+    return "coin";
+}

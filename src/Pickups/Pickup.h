@@ -35,6 +35,7 @@ public:
     float GetRadius() const { return radius; }
     bool CheckCollisionPlayer(const Rectangle& charBounds) const;
     virtual const char* GetCollectMessage() const { return nullptr; }
+    virtual const char* GetCollectSound() const {return nullptr; }
     static float moveDownVelocity;
 
 protected:

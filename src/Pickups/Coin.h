@@ -21,7 +21,8 @@ public:
 
     void Update(float dt) override;
     void Draw() const override;
-    void OnCollect(Character& character, EffectSystem& effects) override;
+    void OnCollect(Character& character, EffectSystem& effects) override;   
+    const char* GetCollectSound() const override;
     
     int GetValue() const {return value;}
 

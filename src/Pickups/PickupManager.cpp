@@ -65,7 +65,13 @@ void PickupManager::Update(float dt, Character& character, EffectSystem& effects
 
             p->OnCollect(character, effects);
 
-            if (auto coin = dynamic_cast<Coin*>(p.get()))
+            if (const char* id = p->GetCollectSound())
+            {
+                auto it = sound.find(id);
+                if (it != sound.end()) PlaySound(it->second);
+            }
+
+            if(auto coin = dynamic_cast<Coin*>(p.get()))
             {
                 float added = coin->GetValue() * effects.GetScoreMultiplier();
                 score += added;
@@ -73,7 +79,7 @@ void PickupManager::Update(float dt, Character& character, EffectSystem& effects
             }
             else
             {
-                if (const char* msg = p->GetCollectMessage())
+                if(const char* msg = p->GetCollectMessage())
                     ui.PushAt(msg, msgPos);
             }
         }
@@ -160,4 +166,29 @@ void PickupManager::CheckDelete(){
             PickupManager::CheckDelete();
         }
     }
+}
+
+
+void PickupManager::InitSounds()
+{
+    if(soundsLoaded) return;
+    soundsLoaded = true;
+
+    sound["coin"] = LoadSound("assets/Audio/Sounds/Coin_Sound.mp3");
+    SetSoundVolume(sound["coin"], 0.6f);
+    sound["spring"] = LoadSound("assets/Audio/Sounds/JumpBoost_Sound.mp3");
+    //SetSoundVolume(sound["spring"], 0.6f);
+    sound["slow"] = LoadSound("assets/Audio/Sounds/Slow_Sound.mp3");
+    SetSoundVolume(sound["slow"], 1.4f);
+    sound["scorex2"] = LoadSound("assets/Audio/Sounds/ScoreMulti_Sound.mp3");
+    SetSoundVolume(sound["score x2"], 0.6f);
+}
+
+void PickupManager::UnloadSounds()
+{
+    if(!soundsLoaded) return;
+    soundsLoaded = false;
+
+    for (auto& kv : sound) UnloadSound(kv.second);
+    sound.clear();
 }
