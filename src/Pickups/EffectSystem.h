@@ -10,7 +10,8 @@ class EffectSystem{
         // Enum che rappresenta i tipi di effetti disponibili nel gioco
         enum class EffectType {
             Slow,
-            ScoreMultiplier
+            ScoreMultiplier,
+            ReverseControl
         };
 
         // read-only per UI
@@ -45,6 +46,8 @@ class EffectSystem{
         float GetSpeedMultiplier() const;
  
         float GetScoreMultiplier() const;
+
+        bool IsReverseControlActive() const;
         
         // UI
         std::vector<ActiveEffectInfo> GetActiveEffects() const;

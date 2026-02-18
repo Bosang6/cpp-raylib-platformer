@@ -20,7 +20,7 @@ class PickupManager {
 
     public :
         // Tipi di Pickup attualmente disponibili
-        enum class Type { Coin, Spring, Slow, ScoreMultiplier } ;
+        enum class Type { Coin, Spring, Slow, ScoreMultiplier, ReverseControl } ;
 
 
         // Struttura contenente i valori di default
@@ -41,6 +41,9 @@ class PickupManager {
             // ScoreMultiplier
             float scoreMultiplier = 2.f;
             float scoreDuration = 15.f;
+
+            // ReverseControl
+            float reverseDuration = 5.f;
         };
 
         

@@ -14,6 +14,7 @@ class GameScene : public ISceneUpdate
 {
 public:
     GameScene();
+    //~GameScene();
     void Update() override;
     bool GetIsRunning() const;
     void SetIsRuning(bool isRunning);
@@ -43,6 +44,8 @@ private:
     PlayableCharacter player{{200, 100}, {64, 96}}; 
     float instructionsTimer{5.0f};
     float deltaTime{GetFrameTime()};
+    Sound deathSound{};
+    bool deathSoundPlayed = false;
     
     // Sistema di punteggio
     float score{0.0f};

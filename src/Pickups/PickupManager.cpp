@@ -6,6 +6,7 @@
 #include "Spring.h"
 #include "Slow.h"
 #include "ScoreMultiplier.h"
+#include "ReverseControl.h"
 #include "Character/Character.h"
 #include "EffectSystem.h"
 #include "UI/UIPickMessage.h"
@@ -42,6 +43,9 @@ void PickupManager::Spawn(Type type, Vector2 pos){
             Add(std::make_unique<ScoreMultiplier>(pos, defaults.radius, defaults.scoreMultiplier, defaults.scoreDuration));
             break;
 
+        case Type::ReverseControl:
+            Add(std::make_unique<ReverseControl>(pos,defaults.radius, defaults.reverseDuration)); 
+            break;
     }
     
 }
@@ -136,7 +140,7 @@ void PickupManager::GeneratePickups(){
         float newY = RandFloat(lastGeneratedY - 400.0f, lastGeneratedY - 200.0f);
 
         // random pickup
-        int effetType = RandInt(0, 4);
+        int effetType = RandInt(1, 5);
         switch (effetType)
         {
         case 1:
@@ -150,7 +154,10 @@ void PickupManager::GeneratePickups(){
             break;
         case 4:
             Spawn(PickupManager::Type::Spring, Vector2{newX, newY});
-            break;        
+            break;       
+        case 5:
+            Spawn(PickupManager::Type::ReverseControl, {newX, newY});
+            break;
         }
         //save lastGeneratedY
         lastGeneratedY = newY;
@@ -182,6 +189,8 @@ void PickupManager::InitSounds()
     SetSoundVolume(sound["slow"], 1.4f);
     sound["scorex2"] = LoadSound("assets/Audio/Sounds/ScoreMulti_Sound.mp3");
     SetSoundVolume(sound["score x2"], 0.6f);
+    sound["reverse"] = LoadSound("assets/Audio/Sounds/ReverseControl_Sound.mp3");
+    SetSoundVolume(sound["reverse"], 0.6f);
 }
 
 void PickupManager::UnloadSounds()

@@ -16,6 +16,7 @@ class UIStatusEffects
             {
                 case EffectSystem::EffectType::Slow: return "Slow";
                 case EffectSystem::EffectType::ScoreMultiplier: return "MultiScore";
+                case EffectSystem::EffectType::ReverseControl: return "Reverse";
                 default: return "Effect";
             }
         }

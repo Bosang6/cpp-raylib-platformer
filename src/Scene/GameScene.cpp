@@ -7,18 +7,45 @@ GameScene::GameScene() {
 
 void GameScene::GameInit() {
     gameStart = false;
+
+    Platform::moveDownVelocity = 0.0f;
+    Pickup::moveDownVelocity = 0.0f;
+
+    deathSoundPlayed = false;
+    deathSound = LoadSound("assets/Audio/Sounds/GameOver_Sound.mp3");
+
     backgroundMusic.Init();
+
     platformsManager.Init();
     platformsManager.GeneratePlatforms();
     pickupManager.GeneratePickups();
+    
+    pickupManager.InitSounds();
+
     SetIsRuning(true);
     score = 0.0f;
     instructionsTimer = 5.0f;
-    Vector2 pos = platformsManager.GetFirstPlatformPosition();
-    pos.y -= player.GetBounds().y;
+    
+    /*Vector2 pos = platformsManager.GetFirstPlatformPosition();
+    // pos.y -= player.GetBounds().y;    // Tolto per debug
+    pos.y -= player.GetBounds().height + 20; 
     player.SetPosition(pos);
-    Platform::moveDownVelocity = 0.0f;
-    Pickup::moveDownVelocity = 0.0f;
+    //
+    player.SetVelocity({0, 0});
+    player.SetOnGround(true);
+    //
+    */
+
+    Rectangle pb = player.GetBounds();
+
+    Vector2 pos;
+    pos.x = Game::width  * 0.5f - pb.width  * 0.5f;
+    pos.y = Game::height * 0.5f - pb.height * 0.5f;
+
+    player.SetPosition(pos);
+    player.SetVelocity({0, 0});
+    player.SetOnGround(false); // importante: non sei su una piattaforma
+
 }
 
 float GameScene::GetScore() const {
@@ -94,6 +121,7 @@ void GameScene::Updates(){
 
 void GameScene::HandleCollisions(){
     Rectangle playerBounds = player.GetBounds();
+    player.SetOnGround(false);
     // Collisione temporanea con piattaforma (per testare)
     for(auto& platform : platformsManager.GetPlatforms()){
         if (CheckCollisionRecs(playerBounds, platform->GetBounds()) && 
@@ -117,16 +145,20 @@ void GameScene::HandleCollisions(){
             player.SetPosition({player.GetPosition().x, platform->position.y - playerBounds.height});
             player.SetVelocity({player.GetVelocity().x, 0});
             player.OnLandOnPlatform();
+            break;
 
-        } else if (player.GetPosition().y < platform->position.y - 50) {
-            player.SetOnGround(false);
-        }
+        } 
     }
 }
 
 void GameScene::CheckGameOver(){
     // Controlla se il giocatore è caduto sotto lo schermo (Game Over)
     if(player.GetVelocity().y >= 1000 && player.GetBounds().y > Game::height){
+        
+        if(!deathSoundPlayed){
+            PlaySound(deathSound);
+            deathSoundPlayed = true;
+        }
         SetIsRuning(false);
         backgroundMusic.Close();
     }
@@ -153,3 +185,4 @@ void GameScene::DrawUI(){
     effectsUI.Draw(effects);
     ui.Draw();
 }
+

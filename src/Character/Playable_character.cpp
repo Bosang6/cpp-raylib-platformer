@@ -103,7 +103,8 @@ void PlayableCharacter::Draw() {
         
         // Debug
         DrawText(TextFormat("Jumps: %d", jumpsRemaining), 10, 10, 20, WHITE);
-        
+        DrawText(TextFormat("Vel Y: %.2f", velocity.y), 10, 35, 20, WHITE);
+               
     } else {
         // Fallback - Calcola posizione centrale per il disegno
         float centerX = position.x + size.x / 2;
@@ -204,7 +205,20 @@ void PlayableCharacter::Draw() {
 void PlayableCharacter::HandleInput(float deltaTime, const EffectSystem& effects) {
     
     float speed = moveSpeed * effects.GetSpeedMultiplier();
+    float dir = 0.0f;
     
+    if(IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) dir -= 1.0f;
+    if(IsKeyDown(KEY_D) || IsKeyDown(KEY_RIGHT)) dir += 1.0f;
+
+    // Reverse Control
+    if(effects.IsReverseControlActive()) dir *= -1.0f;
+
+    velocity.x = dir * speed;
+
+    if(dir < 0.0f) facingRight = false;
+    if(dir > 0.0f) facingRight = true;
+
+    /*
     // Movimento orizzontale
     if (IsKeyDown(KEY_A) || IsKeyDown(KEY_LEFT)) {
         velocity.x = -speed;
@@ -214,12 +228,14 @@ void PlayableCharacter::HandleInput(float deltaTime, const EffectSystem& effects
         velocity.x = speed;
         facingRight = true;
     }
+    */
     
     // Salto
     if (IsKeyPressed(KEY_SPACE)) {
         Jump();
         if(isFirstJump){
-            Platform::moveDownVelocity = 125.0f;
+            // Platform::moveDownVelocity = 10.0f;    // Testing
+            Platform::moveDownVelocity = 100.0f;
             Pickup::moveDownVelocity = 125.0f;
             GameScene::gameStart = true;
             isFirstJump = false;

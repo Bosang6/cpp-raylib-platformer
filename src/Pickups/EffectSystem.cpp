@@ -95,6 +95,14 @@ float EffectSystem::GetScoreMultiplier() const {
     
 }
 
+bool EffectSystem::IsReverseControlActive() const {
+    for (const auto& e : effects){
+        if(e.type == EffectType::ReverseControl && e.remainingTime > 0.0f)
+            return true;
+    }
+    return false;
+}
+
 // Restituisce una copia "read-only" degli effetti attivi per la UI
 std::vector<EffectSystem::ActiveEffectInfo> EffectSystem::GetActiveEffects() const
 {
@@ -106,3 +114,6 @@ std::vector<EffectSystem::ActiveEffectInfo> EffectSystem::GetActiveEffects() con
 
     return out;
 }
+
+
+
