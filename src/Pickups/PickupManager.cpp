@@ -186,9 +186,9 @@ void PickupManager::InitSounds()
     sound["spring"] = LoadSound("assets/Audio/Sounds/JumpBoost_Sound.mp3");
     //SetSoundVolume(sound["spring"], 0.6f);
     sound["slow"] = LoadSound("assets/Audio/Sounds/Slow_Sound.mp3");
-    SetSoundVolume(sound["slow"], 1.4f);
+    SetSoundVolume(sound["slow"], 1.0f);
     sound["scorex2"] = LoadSound("assets/Audio/Sounds/ScoreMulti_Sound.mp3");
-    SetSoundVolume(sound["score x2"], 0.6f);
+    //SetSoundVolume(sound["scorex2"], 0.6f);
     sound["reverse"] = LoadSound("assets/Audio/Sounds/ReverseControl_Sound.mp3");
     SetSoundVolume(sound["reverse"], 0.6f);
 }
